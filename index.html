@@ -1,0 +1,81 @@
+<html>
+    <head>
+        <title>JS Leya</title>
+        <script type="text/javascript" src="jquery-1.7.1.js"></script>
+        <script type="text/javascript" src="jsleya.js"></script>
+        <script type="text/javascript">
+            /*$(document).ready(function() {
+                leya.class('public', {
+
+                });
+            });*/
+            var arr = [1,2,3,4,5,6,7,8,9,0,2,4,1,2,235,235,235,235,235,235,235,5,235,2,53,46,45,6,3,5,24,1235,234,634,6,57,457,457,45,56,8,567,46,23,453,5,345,4,52,35,34,34,5,346,34,634,63,23,457,56,56,34,856,8,56,5,75,4,6,34,3,53,5,345,34,534,534,5,345,345,3,534,6,34,235];
+            var obj = {
+                wa: 'waasasf'
+                ,wa2: 'agddgsdg'
+                ,wa3: 'agddgsdg'
+                ,wa4: 'agddgsdg'
+                ,wa5: 'agddgsdg'
+                ,wa6: 'agddgsdg'
+                ,wa7: 'agddgsdg'
+                ,wa8: 'agddgsdg'
+                ,wa9: 'agddgsdg'
+                ,wa223: 'agddgsdg'
+                ,wa22: 'agddgsdg'
+                ,wa226: 'agddgsdg'
+            }
+
+            var val,
+                m = new Date().getMilliseconds(),
+                n;
+
+            leya.each(obj, function(val,key) {
+                //console.log([key, '-',val].join(''));
+                if(key) {
+                    key += key;
+                }
+
+                if(val) {
+                    val += val;
+                }
+            });
+
+            n = new Date().getMilliseconds();
+            val = (m > n) ? (1000 + n)-m : n-m;
+
+            document.write(val);
+            document.write('\n');
+
+            m = new Date().getMilliseconds();
+
+            $.each(obj, function(key, val) {
+                //console.log([key, '-',val].join(''));
+                if(key) {
+                    key += key;
+                }
+
+                if(val) {
+                    val += val;
+                }
+            });
+
+            n = new Date().getMilliseconds();
+
+            val = (m > n) ? (1000 + n)-m : n-m;
+            document.write(val);
+            //console.log(dat.getMilliseconds());
+
+            document.write(typeof leya);
+            var cl = new leya.class({
+                sdsdg:'agsagas'
+                ,aegseg:'sdgsdgsdgs'
+            });
+            var bool = ({wa:'asfasf'} instanceof cl);
+            document.write(bool);
+            console.log(bool);
+        </script>
+    </head>
+    <body>
+
+    </body>
+</html>
