@@ -2,70 +2,68 @@
 
 (function(window, undefined) {
 
-    var leya = function() {
-        //return class();
-    };
+    var leya = (function() {
+        /*return {
+            back: function() {
+                alert('sdgsdgsdgsdgsd');
+            }
+        };  */
 
-    var util = leya.util = {
-        isArray: function(obj) {
-            return (obj instanceof Array);
-        }
-        ,isObject: function(obj) {
-            return !(obj instanceof Array);
-        }
-    };
+        var leya = function() {};
 
-    var each = leya.each = function(arr, fn, scope) {
-        if(arguments.length < 2) {
-            return;
-        }
+        leya.extend = leya.prototype.extend = function(base, ext) {
+            var base = base || {},
+                target = (arguments[2] ? base : new base),//(copybase ? new base : {}),
+                source = ext || {};
 
-        var len = arr.length,
-            isObj = util.isObject(arr);
+            for(var name in source) {
+                target[name] = source[name];
+            }
 
-        if( isObj ) {
-            for(var key in arr) {
-                var val = arr[key];
+            return target;
+        };
 
-                if(fn.call(scope || val, val, key) === false) {
-                    return val;
+        leya.extend(leya, {
+            util: {
+                isArray: function(obj) {
+                    return (obj instanceof Array);
+                }
+                ,isObject: function(obj) {
+                    return !(obj instanceof Array);
                 }
             }
-        } else {
-            for(var i = -1; len > ++i;) {
-                var val = arr[i];
+            ,class: function() {
+                return;
+            }
+            ,each: function(arr, fn, scope) {
+                var len = arr.length,
+                    isObj = len === undefined || leya.util.isObject(arr);
 
-                if(fn.call(scope || val, val, i) === false) {
-                    return val;
+                if( isObj ) {
+                    for(var key in arr) {
+                        var val = arr[key];
+
+                        if(fn.call(scope || val, val, key) === false) {
+                            return val;
+                        }
+                    }
+                } else {
+                    for(var i = 0; i < len;) {
+                        //var val = arr[i];
+
+                        if(fn.call(arr[i], arr[i], i++) === false) {
+                            //return val;
+                        }
+                    }
                 }
+
+                return arr;
             }
         }
+        ,true);
 
-        return arr;
-    };
-
-    var extend = leya.extend = function(base, obj) {
-
-    };
-
-    leya.class = function(newClass) {
-
-
-
-        return new Object(newClass);
-    };
-
-    var model = leya.model = {
-        Model: function() {
-
-        }
-    };
-
-    var data = leya.data = {
-        Record: function() {
-
-        }
-    };
+        return leya;
+    })();
 
     window.leya = leya;
 })(window);
