@@ -6,86 +6,89 @@
  * To change this template use File | Settings | File Templates.
  */
 
-(function(undefined) {
+(function (undefined) {
     var win = window,
         doc = win.document;
 
     var leya = {};
 
     leya.__proto__ = {
-        each: function(o, fncbk, scp) {
+        create:function (ns, conf) {
+            var o = this.ns(ns);
+
+            if (o) {
+
+            }
+        }, each:function (o, fncbk, scp) {
             var len = o.length,
                 isO = len == undefined,
                 v, k = 0;
 
-            if(isO) {
-                for(k in o) {
+            if (isO) {
+                for (k in o) {
                     v = o[k];
 
-                    if(fncbk.call(scp || v, v, k) === false) {
+                    if (fncbk.call(scp || v, v, k) === false) {
                         return v;
                     }
                 }
             } else {
-                for(;k < len;) {
+                for (; k < len;) {
                     v = o[k];
 
-                    if(fncbk.call(scp || v, v, k++) === false) {
+                    if (fncbk.call(scp || v, v, k++) === false) {
                         return v;
                     }
                 }
             }
-        }
-        ,extend: function(fr, to) {
+        }, extend:function (fr, to) {
             var o = to,
                 v;
 
-            for(var i in fr) {
+            for (var i in fr) {
                 v = o[i];
                 v = v || fr[i];
             }
 
             return o;
-        }
-        ,isArray: function(a) {
+        }, isArray:function (a) {
             return (a instanceof Array);
-        }
-        ,isFunction: function(f) { //todo: need to modify this checking
+        }, isFunction:function (f) { //todo: need to modify this checking
             return (f instanceof Function); //(f.apply && f.call);
-        }
-        ,isNumber: function(n) {
+        }, isNumber:function (n) {
             return (typeof n == 'string' || typeof n == 'number') && !isNaN(n - 0) && n !== '';
-        }
-        ,isString: function(s) {
+        }, isString:function (s) {
             return (typeof(s) === 'string');
-        }
-        ,isObject: function(o) {
+        }, isObject:function (o) {
             return (o instanceof Object) && !this.isArray(o) && !this.isFunction(o);
+        }, ns:function (s) {
+            if (this.isString(s)) {
+                var a = s.split('.'),
+                    o = win;
+
+                this.each(a, function (v) {
+                    o = o[v] = o[v] || {};
+                });
+                return o;
+            }
+            return false;
         }
     };
 
     // @ns: leya.Panel
-    leya.Panel = function(c) {
+    leya.create('leya.Panel', {
 
-    };
+    });
+    /*
+     // @ns: leya.Form
+     leya.Form = function(c) {
 
-    // @ns: leya.Form
-    leya.Form = function(c) {
+     };
 
-    };
+     // @ns: leya.FormField
+     leya.FormField = function(c) {
 
-    // @ns: leya.FormField
-    leya.FormField = function(c) {
-
-    };
+     };*/
 
     win.leya = leya;
 })();
-
-var panel = leya.Panel({
-    title: 'Title of Panel'
-});
-
-leya.create({
-    child: [panel]
-});
