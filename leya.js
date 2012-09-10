@@ -28,7 +28,7 @@
             }
             return false;
         }
-        ,each: function (o, fncbk, scp) {
+        ,each: function (o, fbk, scp) {
             var len = o.length,
                 isO = len == undefined,
                 v, k = 0;
@@ -37,7 +37,7 @@
                 for (k in o) {
                     v = o[k];
 
-                    if (fncbk.call(scp || v, v, k) === false) {
+                    if (fbk.call(scp || v, v, k) === false) {
                         return v;
                     }
                 }
@@ -45,7 +45,7 @@
                 for (; k < len;) {
                     v = o[k];
 
-                    if (fncbk.call(scp || v, v, k++) === false) {
+                    if (fbk.call(scp || v, v, k++) === false) {
                         return v;
                     }
                 }
