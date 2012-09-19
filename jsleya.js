@@ -9,7 +9,7 @@
     var win = window,
         doc = document;
 
-    Object.prototype.each = function(callback, scope) {
+    /*Object.prototype.each = function(callback, scope) {
         if(this.length === undefined) {
             for(var k in this) {
                 var v = this[k];
@@ -27,7 +27,7 @@
         }
 
         return this;
-    };
+    };*/
 
     var leya = (function() {
         var _leya = function() {};
@@ -111,30 +111,30 @@
                     }
                 };
             }
-            /*,each: function(obj, fn, scope) {
-             *//*var len = arr.length,
-             isObj = len === undefined || leya.util.isObject(arr);
+            ,each: function(obj, fn, scope) {
+                 var len = obj.length,
+                    isObj = len === undefined || leya.util.isObject(obj);
 
-             if( isObj ) {
-             for(var key in arr) {
-             var val = arr[key];
+                 if( isObj ) {
+                     for(var key in obj) {
+                        var val = obj[key];
 
-             if(fn.call(scope || val, val, key) === false) {
-             return val;
-             }
-             }
-             } else {
-             for(var i = 0; i < len;) {
-             //var val = arr[i];
+                         if(fn.call(scope || val, val, key) === false) {
+                            return val;
+                         }
+                     }
+                 } else {
+                     for(var i = 0; i < len;) {
+                     //var val = arr[i];
 
-             if(fn.call(arr[i], arr[i], i++) === false) {
-             //return val;
-             }
-             }
-             }*//*
+                     if(fn.call(arr[i], arr[i], i++) === false) {
+                     //return val;
+                     }
+                    }
+                 }
 
-             return obj.each(fn, scope);
-             }*/
+                 return obj.each(fn, scope);
+             }
             ,setClass: function(ns /*, newObj */) {
                 var r = win,
                     n = arguments[1],
@@ -203,19 +203,6 @@
 
         return new _leya();
     })();
-
-    /*leya.class('leya.object.Class', {
-     init: function() {
-
-     }
-     ,callback: function() {
-     leya.callbackQueue.get();
-     }
-     });
-
-     leya.class('leya.object.Callback', {
-
-     });*/
 
     win.leya = leya;
 })();

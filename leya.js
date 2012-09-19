@@ -10,11 +10,32 @@
     var win = window,
         doc = win.document;
 
-    var leya = {},
+    if(!Object.hasOwnProperty('create')) {
+        Object.create = function (o) {
+            if (arguments.length > 1) {
+                throw new Error('Object.create implementation only accepts the first parameter.');
+            }
+            function F() {}
+            F.prototype = o;
+            return new F();
+        };
+    }
+
+
+    var leya = function(ns, conf) {
+            if(!arguments.length) {
+                return this;
+            }
+
+            this.init(ns, conf);
+        },
         alias;
 
-    leya.__proto__ = {
-        create: function (ns, conf) {
+    leya.fn = leya.prototype = {
+        createModel: function() {
+
+        }
+        ,init: function (ns, conf) {
             var o = this.ns(ns);
 
             if (o) {
@@ -85,7 +106,7 @@
          @param {String} Namespace
          @param {Boolean} ExistenceOnly
          @return Object or Undefined/false
-        */
+         */
         ,ns: function (s, is) {
             if (this.isString(s)) {
                 var a = s.split('.'),
@@ -139,13 +160,15 @@
         }
     };
 
+    leya = new leya();
+
     //leya.ref('leya.isObject', leya.ns);
     leya.isObject = leya.ns;
 
     win.leya = leya;
 
     // @ns: leya.Panel
-    leya.create('leya.Model', {
+    leya('leya.Model', {
         alias: 'model'
         ,init: function() {
 
