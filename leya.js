@@ -6,6 +6,24 @@
  * To change this template use File | Settings | File Templates.
  */
 
+
+/*
+ leya.BoxModel
+ leya.Panel
+ leya.Button
+ leya.TextField
+ leya.TextArea
+ leya.ToggleButton
+ leya.Radio
+ leya.RadioGroup
+ leya.CheckBox
+ leya.CheckBoxGroup
+ leya.ComboBox
+ leya.Modal
+ leya.Form
+ leya.FormField
+ */
+
 (function (undefined) {
     var win = window,
         doc = win.document;
@@ -32,7 +50,22 @@
         alias;
 
     leya.fn = leya.prototype = {
-        createModel: function() {
+        createModel: function(ns, o) {
+
+        }
+        ,createView: function(ns, o) {
+
+        }
+        ,createController: function(ns, o) {
+
+        }
+        ,createRecord: function(ns, o) {
+
+        }
+        ,getRecord: function(ns) {
+
+        }
+        ,getModel: function(ns) {
 
         }
         ,init: function (ns, conf) {
@@ -160,33 +193,6 @@
         }
     };
 
-    leya = new leya();
-
-    //leya.ref('leya.isObject', leya.ns);
-    leya.isObject = leya.ns;
-
-    win.leya = leya;
-
-    // @ns: leya.Panel
-    leya('leya.Model', {
-        alias: 'model'
-        ,init: function() {
-
-        }
-    });
-
-    // @ns: leya.Panel
-    leya.create('leya.Panel', {
-        alias: 'panel'
-        ,extend: 'leya.Model'
-        ,init: function() {
-
-        }
-    });
-
-    // @ns: leya.Form
-    leya.create('leya.Form', {
-
-    });
+    doc.leya = new leya();
 
 })();
