@@ -4,8 +4,87 @@
 	<link rel="stylesheet" type="text/css" href="style-jsleya.css">
 	<script type="text/javascript" src="js-1.8.js"></script>
 	<script type="text/javascript" src="jsleya.js"></script>
+	<script type="text/javascript">
+		//@@leya.Box
+		leya.abstract('Tupz.Panel', {
+		    //copyTo: ly.fn,
+		    border: true,
+		    renderTo: undefined,
+		    init: function() {
+		        this.render();
+		    },
+		    render: function() {
+		        //
+
+		        var div = document.createElement('div'),
+		        	div2 = document.createElement('div'),
+		        	div3 = document.createElement('div');
+
+		        div.innerHTML = this.title;
+		        div.style.background = this.background || 'white';
+		        div.style.color = this.fontColor || 'black';
+		        div.style.padding = '2px';
+		        
+
+		        div2.style.padding = '10px';
+		        div2.style.background = 'darkgray';
+
+		        div3.innerHTML = this.html || '';
+		        div3.style.height = this.height;
+		        div3.style.background = 'gray';
+
+		        div2.appendChild(div);
+		        div2.appendChild(div3);
+
+		        document.body.appendChild(div2);
+		        this.el = div2;
+		        this.contentEl = div3;
+
+		        this.renderItems();
+		    },
+		    renderItems: function() {
+		    	var self = this,
+		    		items;
+
+		    	if(items = this.items) {
+		    		leya.each(items, function(item) {
+		    			self.contentEl.appendChild(item.el);	
+		    		});
+		    		
+		    	}
+		    }
+		});
+
+
+		leya.ready(function() {
+		    var box1 = new Tupz.Panel({
+		        fontColor: 'gray',
+		        background: 'black',
+		        height: '100px',
+		        title: 'this is box 1',
+		        html: 'this is the content 1'
+		    });
+
+		    var box2 = new Tupz.Panel({
+		        fontColor: 'gray',
+		        background: 'black',
+		        height: '100px',
+		        title: 'this is box 2',
+		        html: 'this is the content 2'
+		    });
+
+		    var box3 = new Tupz.Panel({
+		        fontColor: 'gray',
+		        background: 'black',
+		        //height: '100px',
+		        title: 'this is title2',
+		        items: [box2, box1]
+		    });
+
+		});
+
+	</script>
 </head>
 <body>
-	test
 </body>
 </html>

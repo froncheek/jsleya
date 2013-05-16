@@ -26,7 +26,7 @@ ly.fn.extend = function(/*source, [,(abstract,sealed...]*/) {
         s;
 
     if(Object.prototype.isExtensible && !Object.isExtensible(d)) {
-        return d;
+        return false;
     }
     for(var i=1, len = args.length; i < len;) {
         s = args[i++];
@@ -48,7 +48,7 @@ ly.fn.extend(ly.fn, {
             };
         } else {
             eventListeners.ready = 'readystatechange';
-            return function(t, l, u, a) {
+            return function(t, l) {
                 document.attachEvent('on' + t, l);
                 return this;
             };
@@ -61,7 +61,7 @@ ly.fn.extend(ly.fn, {
                 return this;
             };
         } else {
-            return function(t, l, u, a) {
+            return function(t, l) {
                 document.detachEvent('on' + t, l);
                 return this;
             };
@@ -96,7 +96,7 @@ ly.fn.extend(ly.fn, {
             for(var i = 0; i < len;) {
                 //var val = arr[i];
 
-                if(fn.call(arr[i], arr[i], i++) === false) {
+                if(fn.call(o[i], o[i], i++) === false) {
                 //return val;
                 }
             }
@@ -118,22 +118,22 @@ ly.fn.extend(ly.fn, {
     isObject: function(o) {
         return (o instanceof Object) && !this.isArray(o) && !this.isFunction(o);
     },
-    isns: function(ns) {
+    isNs: function(ns) {
         return /^[a-zA-Z]+([a-zA-Z\.]+([a-zA-Z]+))$/.test(ns);
     },
     isClass: function() {
         var ns;
-        return (arguments.length >= 2 && this.isString(ns = arguments[0]) && ns && this.isns(ns));
+        return (arguments.length >= 2 && this.isString(ns = arguments[0]) && ns && this.isNs(ns));
     },
     isDefProp: function() {
 
     },
-    getBrowserEvent: function() {
+    /*getBrowserEvent: function() {
         if(arguments.length) {
             return eventListeners[arguments[0]];
         }
         return eventListeners;
-    },
+    },*/
     getBody: function() {
         /*var body;
 
@@ -197,52 +197,12 @@ ly.fn.extend(ly.fn, {
 
 
 
-//@@leya.Box
-ly.fn.abstract('Box', {
-    copyTo: ly.fn,
-    border: true,
-    draggable: false,
-    renderTo: undefined,
-    init: function() {
-
-
-        this.render();
-    },
-    render: function() {
-        alert('wa');
-    }
-});
-
 window.leya = new ly();
-
-window.panel = new leya.Box({
-    text: 'waasdas'
-});
 
 
 })();
 
-leya.ready(function() {
-    console.log('1');
-});
-leya.ready(function() {
-    console.log('2');
-});
-leya.ready(function() {
-    console.log('3');
-});
-leya.ready(function() {
-    console.log('4');
-});
-leya.ready(function() {
-    console.log('5');
-});
-leya.ready(function() {
-    console.log('6');
-});
-leya.ready(function() {
-    console.log('7');
-});
-leya.ready(function() {
-    console.log('8');
-});
+
+
+
+
