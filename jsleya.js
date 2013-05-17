@@ -20,9 +20,12 @@ var win = window,
 
 ly.fn = ly.prototype;
 
+ly.fn.version = '1.0';
+ly.fn.versionName = 'Alpha';
+
 ly.fn.extend = function(/*source, [,(abstract,sealed...]*/) {
     var args = arguments,
-        d = args[0],
+        d = args[0] || {},
         s;
 
     if(Object.prototype.isExtensible && !Object.isExtensible(d)) {
@@ -84,7 +87,7 @@ ly.fn.extend(ly.fn, {
         var len = o.length,
             isObj = len === undefined || this.isObject(o);
 
-        if( isObj ) {
+        if(isObj) {
             for(var key in o) {
                 var val = o[key];
 
@@ -94,14 +97,11 @@ ly.fn.extend(ly.fn, {
             }
         } else {
             for(var i = 0; i < len;) {
-                //var val = arr[i];
-
-                if(fn.call(o[i], o[i], i++) === false) {
-                //return val;
+                if(fn.call(sc || o, o[i], i++) === false) {
+                    return o;
                 }
             }
         }
-        //return obj.each(fn, sc);
     },
     isArray: function(o) {
         return Array.isArray(o);
@@ -119,7 +119,7 @@ ly.fn.extend(ly.fn, {
         return (o instanceof Object) && !this.isArray(o) && !this.isFunction(o);
     },
     isNs: function(ns) {
-        return /^[a-zA-Z]+([a-zA-Z\.]+([a-zA-Z]+))$/.test(ns);
+        return /^[\w]+([a-zA-Z\.]+([\w]+))$/.test(ns);
     },
     isClass: function() {
         var ns;
@@ -161,6 +161,30 @@ ly.fn.extend(ly.fn, {
 
         return [ns1, n.substr(ns1 ? len + 1 : 0, n.length - len)];
     },
+    setVersion: function(/* Version */) {
+        var v = arguments[0],
+            lyv;
+
+        if(leya.version != v) {
+            if(v = leya.ly[v]) {
+                lyv = leya.ly;
+                delete leya.ly;
+                lyv[leya.version] = leya;
+                leya = v;
+                leya.ly = lyv;
+            }
+        }
+    },
+    useVersion: function(v, fn) {
+        var fromVersion = this, toVersion;
+
+        if(!this.ly || !(toVersion = this.ly[v]) || !fn || ! this.isFunction(fn)) {
+            return;
+        }
+        leya = toVersion;
+        fn.call(window, fromVersion);
+        leya = fromVersion;        
+    },
     initClass: function() {
         var _createConstructor = function() {
                 return function() {
@@ -176,16 +200,20 @@ ly.fn.extend(ly.fn, {
                     fn = _createConstructor();
                     ns = this.splitns(ns);
                     fn.prototype = o;
-                    o = this.ns(ns[0], o.copyTo);
+                    o = this.ns(ns[0], o.attachTo);
                     o[ns[1]] = fn;
                 }
             },
             override: function() {
-                return function() {
+                return function(ns, o) {
                     if(this.isClass.apply(this, arguments)) {
                         fn = _createConstructor();
-
-                        //this.extend({}, )
+                        ns = this.splitns(ns);
+                        fn.prototype = o;
+                        this.extend(fn.prototype.base, o.base.prototype);
+                        //this.extend(fn.prototype.base, o.base.prototype);
+                        o = this.ns(ns[0], o.attachTo);
+                        o[ns[1]] = fn;
                     }
                 };
             }()
@@ -197,12 +225,18 @@ ly.fn.extend(ly.fn, {
 
 
 
-window.leya = new ly();
 
+if(window.leya) {
+    var ver;
+
+    if(leya.version != (ver = ly.fn.version)) {
+        leya.ly = leya.ly || {};
+        if(!leya.ly[ver]) {
+            leya.ly[ver] = new ly();    
+        }
+    }
+} else {
+    window.leya = new ly();    
+}
 
 })();
-
-
-
-
-

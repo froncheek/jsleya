@@ -5,9 +5,10 @@
 	<script type="text/javascript" src="js-1.8.js"></script>
 	<script type="text/javascript" src="jsleya.js"></script>
 	<script type="text/javascript">
+
 		//@@leya.Box
-		leya.abstract('Tupz.Panel', {
-		    //copyTo: ly.fn,
+		leya.abstract('leya.Box', {
+		    //attachTo: ly.fn,
 		    border: true,
 		    renderTo: undefined,
 		    init: function() {
@@ -26,6 +27,7 @@
 		        div.style.padding = '2px';
 		        
 
+				div2.style.margin = '2px';
 		        div2.style.padding = '10px';
 		        div2.style.background = 'darkgray';
 
@@ -55,9 +57,18 @@
 		    }
 		});
 
+		leya.override('leya.Box2', {
+		    base: leya.Box,
+		    init: function() {
+		    	return true;
+		    }
+		});
+
+		var wa = new leya.Box2();
+
 
 		leya.ready(function() {
-		    var box1 = new Tupz.Panel({
+		    var box1 = new leya.Box({
 		        fontColor: 'gray',
 		        background: 'black',
 		        height: '100px',
@@ -65,7 +76,7 @@
 		        html: 'this is the content 1'
 		    });
 
-		    var box2 = new Tupz.Panel({
+		    var box2 = new leya.Box({
 		        fontColor: 'gray',
 		        background: 'black',
 		        height: '100px',
@@ -73,12 +84,20 @@
 		        html: 'this is the content 2'
 		    });
 
-		    var box3 = new Tupz.Panel({
+		    var box3 = new leya.Box({
 		        fontColor: 'gray',
 		        background: 'black',
 		        //height: '100px',
 		        title: 'this is title2',
 		        items: [box2, box1]
+		    });
+
+		    var box4 = new leya.Box({
+		        fontColor: 'gray',
+		        background: 'black',
+		        //height: '100px',
+		        title: 'this is title whatever',
+		        items: [box1]
 		    });
 
 		});
