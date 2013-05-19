@@ -15,8 +15,10 @@ var win = window,
     loc = location,
     nav = navigator,
     ua = nav.userAgent,
+    id = 1000,
     ly = function() {},
-    eventListeners = {};
+    eventListeners = {},
+    eventObservers = [];
 
 ly.fn = ly.prototype;
 
@@ -46,31 +48,36 @@ ly.fn.extend(ly.fn, {
     addEvent: function(/*type, listener, [useCapture], [aWantsUntrusted]*/) {
         if(document.addEventListener) {
             eventListeners.ready = 'DOMContentLoaded';
-            return function(t, l, u, a) {
-                document.addEventListener(t, l, u, a);
+            return function(o, t, l, u, a) {
+                o.addEventListener(t, l, u, a);
                 return this;
             };
         } else {
             eventListeners.ready = 'readystatechange';
-            return function(t, l) {
-                document.attachEvent('on' + t, l);
+            return function(o, t, l) {
+                o.attachEvent('on' + t, l);
                 return this;
             };
         }
     }(),
     removeEvent: function() {
         if(document.removeEventListener) {
-            return function(t, l, u, a) {
-                document.removeEventListener(t, l, u, a);
+            return function(o, t, l, u, a) {
+                o.removeEventListener(t, l, u, a);
                 return this;
             };
         } else {
-            return function(t, l) {
-                document.detachEvent('on' + t, l);
+            return function(o, t, l) {
+                o.detachEvent('on' + t, l);
                 return this;
             };
         }
     }(),
+    addObserver: function() {
+    },
+    removeObserver: function() {
+        
+    },
     ready: function(fn) {
 
         if(leya.isDocReady && document.body) {
@@ -79,9 +86,9 @@ ly.fn.extend(ly.fn, {
         }
 
         leya.isDocReady = true;
-        leya.addEvent(eventListeners.ready, function() {
+        leya.addEvent(document, eventListeners.ready, function() {
             if (document.readyState === CONST.complete || document.body) {
-                leya.removeEvent(eventListeners.ready, arguments.callee);
+                leya.removeEvent(document, eventListeners.ready, arguments.callee);
                 fn.call(window);
             }
         }, false);
@@ -122,6 +129,15 @@ ly.fn.extend(ly.fn, {
         }
         
         return d;   
+    },
+    getHeight: function() {
+        return getHeightAndWidth('Height');
+    },
+    getWidth: function() {
+        return getHeightAndWidth('Width');
+    },
+    getId: function() {
+        return 'leya-comp-' + (id++);
     },
     isArray: function(o) {
         return Array.isArray(o);
@@ -277,6 +293,58 @@ ly.fn.extend(ly.fn, {
     }()
 });
 
+function createHtml(parent) {
+    var dom = document.createElement(this.tag),
+        children = this.children || [],
+        style = this.style;
+
+        delete this.style;
+        delete this.children;
+
+        ly.fn.extend(dom, this);
+
+        if(children.length) {
+            delete style.height;
+        } else {
+            if(parent) {
+                if(parent.clientHeight) {
+                    style.height -= parent.clientHeight;
+                } else {
+                    style.height -= parent.offsetHeight;
+                }
+            }
+        }
+
+        ly.fn.extend(dom.style, style);
+        dom.id = (this.id ? this.id : leya.getId());
+
+        if(this.renderTo) {
+            this.renderTo.appendChild(dom);
+        } else {
+            parent.appendChild(dom);
+        }
+
+        ly.fn.each(children, function(v) {
+            dom.appendChild(createHtml.call(v, dom));
+        });
+        
+    return dom;
+};
+
+function getHeightAndWidth(hw) {
+    var s;
+
+    if(s = win['inner' + hw]) {
+        return s;
+    }
+    if(doc.body && (s = doc.body['client' + hw])) {
+        return s;
+    }
+    if(doc.documentElement && (s = doc.documentElement['client' + hw])) {
+        return s;
+    }
+};
+
 if(curLeya) {
     var ver;
 
@@ -290,5 +358,51 @@ if(curLeya) {
 } else {
     window.leya = new ly();    
 }
+
+leya.abstract('leya.Element', {
+    init: function(prop) {
+        this.dom = createHtml.call(this);
+    },
+    addClass: function(className) {
+        var dom = this.dom || this;
+
+        if(dom.classList) {
+            dom.classList.add(className);
+        } else {
+            dom.className += className;
+        }
+    },
+    removeClass: function(className) {
+        var dom = this.dom || this;
+
+        if(dom.classList) {
+            dom.classList.remove(className);
+        } else {
+            //dom.className += className;
+        }
+    },
+    addEvent: function(t, l, u, a) {
+        if(document.addEventListener) {
+            return function(t, l, u, a) {
+                var dom = this.dom;
+
+                dom.addEventListener(t, l, u, a);
+                return this;
+            };
+        } else {
+            return function(t, l) {
+                var dom = this.dom;
+
+                dom.attachEvent('on' + t, l);
+                return this;
+            };
+        }
+    }()
+});
+
+
+leya.addEvent(window, 'resize', function() {
+    console.log(arguments);
+});
 
 })(window.leya);

@@ -1,0 +1,1119 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"clie",
+				"clientHeight"
+			],
+			[
+				"app",
+				"appendChild"
+			],
+			[
+				"bo",
+				"body"
+			],
+			[
+				"crea",
+				"createHtml"
+			],
+			[
+				"docu",
+				"documentElement"
+			],
+			[
+				"cla",
+				"className"
+			],
+			[
+				"add",
+				"addClass"
+			],
+			[
+				"cl",
+				"className"
+			],
+			[
+				"get",
+				"getNamespace"
+			],
+			[
+				"bui",
+				"buildTbar"
+			],
+			[
+				"an",
+				"anchor"
+			],
+			[
+				"func",
+				"function"
+			],
+			[
+				"user",
+				"useCapture"
+			],
+			[
+				"doc",
+				"document"
+			],
+			[
+				"back",
+				"background-color"
+			],
+			[
+				"li",
+				"link	Tag"
+			],
+			[
+				"ar",
+				"arguments"
+			],
+			[
+				"defin",
+				"defineProperty"
+			],
+			[
+				"ap",
+				"apply"
+			],
+			[
+				"con",
+				"constructor"
+			],
+			[
+				"cop",
+				"copyTo"
+			],
+			[
+				"pr",
+				"prototype"
+			],
+			[
+				"pre",
+				"preInit"
+			],
+			[
+				"abs",
+				"abstract"
+			],
+			[
+				"proto",
+				"prototype"
+			],
+			[
+				"win",
+				"window"
+			],
+			[
+				"Abstrac",
+				"AbstractClass"
+			],
+			[
+				"prot",
+				"prototype"
+			],
+			[
+				"sam",
+				"sample"
+			],
+			[
+				"on",
+				"onDelete"
+			],
+			[
+				"init",
+				"initConfig"
+			],
+			[
+				"Ex",
+				"Extend"
+			],
+			[
+				"gri",
+				"gridPanel"
+			],
+			[
+				"fun",
+				"Func1"
+			],
+			[
+				"obj",
+				"obj2"
+			],
+			[
+				"ob",
+				"obj2"
+			],
+			[
+				"cli",
+				"clickMe"
+			],
+			[
+				"click",
+				"Click"
+			],
+			[
+				"re",
+				"rePattern"
+			],
+			[
+				"len",
+				"length"
+			],
+			[
+				"Fu",
+				"FullName"
+			],
+			[
+				"in",
+				"input	Tag"
+			],
+			[
+				"write",
+				"writeLine"
+			],
+			[
+				"param",
+				"param2"
+			],
+			[
+				"para",
+				"param2"
+			],
+			[
+				"pa",
+				"param2"
+			],
+			[
+				"paa",
+				"param1"
+			],
+			[
+				"a",
+				"aFunction"
+			],
+			[
+				"wri",
+				"writeLine"
+			],
+			[
+				"is",
+				"isAlphaNumeric"
+			],
+			[
+				"pro",
+				"prototype"
+			],
+			[
+				"create",
+				"createComponent"
+			],
+			[
+				"di",
+				"display"
+			],
+			[
+				"ed",
+				"editFn"
+			],
+			[
+				"text",
+				"Textblast"
+			],
+			[
+				"no",
+				"nodeValue"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"file": "jsleya.js",
+			"settings":
+			{
+				"buffer_size": 10385,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "jsleya-comp-all.js",
+			"settings":
+			{
+				"buffer_size": 1964,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "jsleya.html",
+			"settings":
+			{
+				"buffer_size": 1146,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "style-jsleya.css",
+			"settings":
+			{
+				"buffer_size": 1243,
+				"line_ending": "Windows"
+			}
+		}
+	],
+	"build_system": "",
+	"command_palette":
+	{
+		"height": 150.0,
+		"selected_items":
+		[
+			[
+				"html",
+				"Set Syntax: HTML"
+			],
+			[
+				"java",
+				"Set Syntax: JavaScript"
+			],
+			[
+				"ja",
+				"Set Syntax: JavaScript"
+			],
+			[
+				"install",
+				"Package Control: Install Package"
+			],
+			[
+				"insta",
+				"Package Control: Install Package"
+			],
+			[
+				"instal",
+				"Package Control: Install Package"
+			],
+			[
+				"xmli",
+				"Snippet: XML Processing Instruction"
+			],
+			[
+				"xml",
+				"Set Syntax: XML"
+			],
+			[
+				"file",
+				"FileDiffs: Menu"
+			],
+			[
+				"s",
+				"SVN: Checkout…"
+			],
+			[
+				"list",
+				"Package Control: List Packages"
+			],
+			[
+				"Package Control: ",
+				"Package Control: List Packages"
+			],
+			[
+				"pack",
+				"Preferences: Browse Packages"
+			],
+			[
+				"css",
+				"Set Syntax: CSS"
+			],
+			[
+				"javas",
+				"Set Syntax: JavaScript"
+			],
+			[
+				"hml",
+				"Snippet: html"
+			],
+			[
+				"html	",
+				"Snippet: html"
+			],
+			[
+				"php",
+				"Snippet: <?php … ?>"
+			]
+		],
+		"width": 392.0
+	},
+	"console":
+	{
+		"height": 0.0
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"file_history":
+	[
+		"/D/projects/hcktn/test.html",
+		"/D/projects/hcktn/jscripts/hack.js",
+		"/D/projects/hcktn/ALM/index.html",
+		"/D/projects/hcktn/ALM/data/data.json",
+		"/D/projects/hcktn/ALM/view/hcktn.view.ALMItem.js",
+		"/D/projects/hcktn/ALM/controller/hcktn.controller.ALMItem.js",
+		"/D/projects/hcktn/ALM/model/hcktn.model.ALMItem.js",
+		"/D/projects/hcktn/ALM/SampleTreeCode.js",
+		"/D/projects/hcktn/ALM/view/hcktn.view.ALM.js",
+		"/D/projects/hcktn/sampleMVC/index.html",
+		"/D/projects/hcktn/jscripts/ext-3.4.0/ext-all-debug.js",
+		"/D/projects/hcktn/sampleMVC/controller/hcktn.controller.SampleMVC.js",
+		"/D/projects/hcktn/sampleMVC/view/hcktn.view.SampleMVC.js",
+		"/D/projects/hcktn/sampleMVC/view/hcktn.view.SampleMVCForm.js",
+		"/D/projects/hcktn/sampleMVC/model/hcktn.model.SampleMVCForm.js",
+		"/D/projects/hcktn/sampleMVC/model/hcktn.model.SampleMVC.js",
+		"/D/projects/hcktn/sampleMVC/data/data.json",
+		"/D/projects/hcktn/sample.html",
+		"/E/forDep/db/scripts/EmailContacts.sql",
+		"/E/ERC/Patterns/Assignment/PC-Assignment-c-GroupToIndex.xml",
+		"/E/NEXTGEN/ASI/Stylesheets/Templates/Report/X3e_Export.xsl",
+		"/E/ERC/Patterns/Offboard/v2-4/ManageSeparations/Offbd-user-f-profileCustom.xml",
+		"/E/ERC/Patterns/Offboard/v2-4/ManageSeparations/Offbd-user-r-ExistingUserList.xml",
+		"/E/ERC/Patterns/Offboard/v2-4/ManageSeparations/Offbd-user-f-profileMain.xml",
+		"/E/ERC/Patterns/Offboard/v2-4/ManageSeparations/Offbd-user-c-TabConsole.xml",
+		"/E/ERC/Patterns/Offboard/v2-4/ManageSeparations/Offbd-user-r-UserList.xml",
+		"//phmadjilaga02/E/forDep/db/scripts/deleteEmailContacts.sql",
+		"/E/ERC/Patterns/BNA/User/searchAggregator.xslt",
+		"/E/ERC/Patterns/ProcessFramework/V2-3/ProcessBuilder/pf-config-r-ManageSteps.xml",
+		"/E/ERC/Patterns/Clients/NewDemo/CallCenter/Scripts/callcenter_Form.js",
+		"/E/ERC/Patterns/ProcessFramework/V2-3/FromEmailContacts/pf-email-r-fromcontacts.xml",
+		"/E/ERC/Patterns/ProcessFramework/V2-3/FromEmailContacts/pf-email-c-fromcontacts.xml",
+		"/E/ERC/Patterns/ProcessFramework/V2-3/FromEmailContacts/pf-email-r-fromcontactsPopup.xml",
+		"/E/ERC/Patterns/Admin/en-US/Analytics/aa-analytics-r-ConsoleDocumentSearch.xml",
+		"/E/ERC/Patterns/ProcessFramework/V2-3/ProcessBuilder/pf-config-r-StepPerms.xml",
+		"/E/ERC/Patterns/Onboard-Global/v4-5/ProcessBuilder/proc2-mgr-r-StepPerms.xml",
+		"/E/forDep/FromEmailContacts/pf-email-r-fromcontactsPopup.xml",
+		"/E/forDep/GeneralConfiguration/pf-admin-r-ConfigurationTypes.xml",
+		"/E/forDep/GeneralConfiguration/pf-admin-r-CopyTourConfiguration.xml",
+		"/E/forDep/GeneralConfiguration/pf-admin-c-GeneralConfiguration.xml",
+		"//phmadmctupas01/E/ERC/Patterns/ProcessFramework/V2-3/FromEmailContacts/pf-email-r-fromcontacts.xml",
+		"//phmadmctupas01/E/ERC/Patterns/ProcessFramework/V2-3/FromEmailContacts/pf-email-r-fromcontacts2.xml",
+		"/E/ERC/Patterns/Assignment/PC-Assign-r-IndexToGroup.xml",
+		"/E/ERC/Patterns/Utilities/SiteMonitor/util-sitemon-c-Performance.xml",
+		"/E/ERC/Patterns/PSTools/Workflow/ps-wf-r-Stages.xml",
+		"/E/ERC/Patterns/sw3/RowEditor/Sw3-RowEditor-r-Userinfo.xml",
+		"/E/NEXTGEN/ASI/Scripts/Smartware/V3-14/plugins/RowEditor.js",
+		"/E/ERC/Patterns/Admin/en-US/FedSearch/Copy of aa-fedsearch-f-Details.xml",
+		"/E/NEXTGEN/ASI/Stylesheets/Templates/Report/X3e_ExtRemoteReport.xsl",
+		"/E/NEXTGEN/ASI/Stylesheets/Templates/Report/X3e_ExtReport.xsl",
+		"/E/ERC/Patterns/Samples/Dev Enablement/Employee/sw-ola-emp-r-main.xml",
+		"/E/ERC/Patterns/Samples/Dev Enablement/Employee/sw-ola-emp-r-rate.xml",
+		"/E/ERC/Patterns/ProcessFramework/AdminConsole/pf-admin-r-AdminConsoleReport.xml",
+		"/E/ERC/Patterns/Onboard/v4-8/ManageNewHires/Onbd-user-f-profileMain.xml",
+		"/E/ERC/Schemas/X3e_ExtValidator.xsd",
+		"/E/ERC/Patterns/ProcessFramework/V2-3/ProcessBuilder/pf-config-f-pickTourSso.xml",
+		"/E/ERC/Patterns/Onboard/v4-8/AdminConsole/Onbd-admin-f-UserDetails.xml",
+		"/E/ERC/Patterns/ProcessFramework/v2-4/TourProcessor/pf-tour-r-tourTakerName.xml",
+		"/E/ERC/Patterns/Admin/en-US/User/aa-users-f-userDetails.xml",
+		"//phmadmctupas01/BackupFilesFromPHMAW219/Jhe/NEXTGEN/ASI/Web.Config",
+		"/E/ERC/Patterns/ProcessFramework/v2-4/AdminTools/pf-tools-c-emailcontacts.xml",
+		"/E/ERC/Patterns/Offboard/v2-4/AdminConsole/Offbd-admin-f-UserDetails.xml",
+		"/E/NEXTGEN/ASI/Stylesheets/Templates/Form/X3e_ExtForm.xsl",
+		"/E/ERC/Schemas/Form/X3e_ExtForm.xsd",
+		"//phmadmctupas01/E/ERC/Patterns/ProcessFramework/v2-4/ProcessBuilder/pf-config-f-steps.xml",
+		"/E/QuickFix/AdminConsole/Onbd-admin-f-UserDetails.xml",
+		"/C/Users/jilagan/tcmas.bat",
+		"/C/Users/jilagan/Documents/projects/XSLT/MovieGuide/result.html",
+		"/E/ERC/Patterns/Admin/en-US/Analytics/aa-analytics-c-submain.xml",
+		"/E/ERC/Patterns/CaseManagement/5.0 Old/Analytics/chart/cm-anal-c-csrcases.xml",
+		"/E/ERC/Patterns/ProcessFramework/ProcessBuilder/pf-config-f-steps.xml",
+		"/E/ERC/Patterns/Admin/en-US/Analytics/aa-analytics-c-FeedBackCharts.xml",
+		"/E/forDep/AdminTools/pf-email-r-emailcontactsPopup.xml",
+		"/E/forDep/AdminTools/pf-email-r-emailcontacts.xml",
+		"/E/forDep/AdminTools/pf-email-c-emailcontacts.xml",
+		"/E/ERC/Patterns/Samples/Dev Enablement/Backup/Employee/sw-ola-emp-c-loan.xml",
+		"/E/ERC/Patterns/Samples/Dev Enablement/Employee/sw-ola-emp-f-loan.xml",
+		"/E/NEXTGEN/ASI/Stylesheets/Templates/Form/X3e_ExtRemoteForm.xsl",
+		"/E/forDep/FromEmailContacts/pf-email-r-fromcontacts.xml",
+		"/E/forDep/db/scripts/FromContactEmails.sql",
+		"/E/ERC/Patterns/Admin/en-US/FedSearch/aa-fedsearch-f-Details_modified.xml",
+		"/C/Users/jilagan/Documents/projects/Ext js/js/extend/extend.js",
+		"/E/ERC/Patterns/Samples/Dev Enablement/Employee/sw-ola-emp-c-main.xml",
+		"/E/ERC/Patterns/Samples/Dev Enablement/Employee/sw-ola-emp-c-loan.xml",
+		"/E/ERC/Patterns/Admin/en-US/Search/aa-searchlookup-r-addAgent.xml",
+		"/E/ERC/Patterns/CaseManagement/5.0/AgentDash/Charts/cm-agent-r-firstcallres.xml",
+		"/E/ERC/Patterns/CaseManagement/5.0/AgentDash/Charts/cm-agent-r-opencasesbypriority.xml",
+		"/E/ERC/Patterns/PSTools/Subn/PS-Subn-f-ReportAgents_DuplicateMetaDeletion.xml",
+		"/E/ERC/Patterns/Admin/en-US/Library/aa-docs-f-LibraryDetails.xml",
+		"/E/ERC/Patterns/Admin/Documents/aa-docs-c-tab.xml",
+		"/E/ERC/Patterns/ProcessFramework/V2-3/AllConsoles/pf-console-r-NavigationMenu.xml",
+		"/E/NEXTGEN/ASI/Scripts/Smartware/V3-14/plugins/SWDataCheckbox.js",
+		"/E/NEXTGEN/ASI/Scripts/Smartware/V3-14/plugins/Ext.sw.WidgetPlugin.js",
+		"/E/ERC/Schemas/Form/X3e_ExtRemoteForm.xsd",
+		"/E/ERC/Patterns/Forms/Samples/SW-Sample-f-InvokeWebService.xml",
+		"/E/ERC/Patterns/Samples/Dev Enablement/Backup/Employee/sw-ola-emp-f-loan.xml",
+		"/E/ERC/Patterns/Samples/Dev Enablement/Employee/sw-ola-emp-c-submain.xml",
+		"/E/ERC/Patterns/Samples/Dev Enablement/Employee/sw-ola-emp-f-Existing.xml",
+		"/E/ERC/Patterns/Samples/Dev Enablement/Employee/sw-ola-emp-f-policies.xml",
+		"/C/Users/jilagan/AppData/Roaming/Sublime Text 2/Packages/Default/Default (Windows).sublime-keymap",
+		"/E/ERC/Patterns/Assignment/PC-UnAssign-r-IndexToGroup.xml",
+		"/E/ERC/Patterns/Calculator/cdhc-Setup-r-Tips.xml",
+		"/E/ERC/Patterns/Onboard/v4-8/ManageNewHires/Onbd-user-r-UserExists.xml",
+		"/E/ERC/Patterns/CaseManagement/5.0/AgentDash/Charts/cm-agent-r-opencasesbytopic.xml",
+		"/E/ERC/Patterns/Onboard/v4-8/Analytics/Onbd-analytic-r-UserInProgress.xml",
+		"/E/ERC/Schemas/SmartWareAgents.xsd",
+		"/E/ERC/Patterns/Admin/Documents/aa-docs-f-details.xml",
+		"/C/Users/jilagan/AppData/Roaming/Sublime Text 2/Packages/User/Default (Windows).sublime-keymap",
+		"/E/NEXTGEN/ASI/Stylesheets/Templates/Report/X3e_LiReport.xsl",
+		"/E/HRDev/ASBetaCM5/main/En-US/464f7157/9e9569cd.xml",
+		"/E/ERC/Patterns/Samples/Dev Enablement/Employee/sw-ola-emp-f-info.xml",
+		"/E/ERC/Patterns/Admin/en-US/User/aa-users-c-profileTabs.xml",
+		"/E/ERC/Patterns/Samples/Dev Enablement/Employee/sw-ola-emp-c-rates.xml",
+		"/E/ERC/Patterns/Jhe/sw-normal-f-test.xml",
+		"/E/ERC/Schemas/Form/X3e_ExtForm-Global.xsd",
+		"/E/ERC/Patterns/CallCenter/Tickets/cc-ticket-f-ticketForm.xml",
+		"/E/ERC/Patterns/Calculator/cdhc-setup-c-helplibrary.xml",
+		"/E/ERC/Patterns/CaseManagement/5.0 Old/Cases/cm-cases-f-profile.xml",
+		"/E/ERC/Patterns/Admin/Users/aa-users-c-profileTab.xml",
+		"/E/ERC/Patterns/Jhe/sw-c-jhepattern.xml",
+		"/E/ERC/Patterns/Jhe/sw-f-jhepattern.xml",
+		"/E/ERC/Patterns/Jhe/sw-r-jhepattern.xml",
+		"//PHMANLLRELL01/Users/lrellosa/Desktop/OLA/Database/script.sql",
+		"/E/ERC/Patterns/Jhe/tb-Tiki-c-drink.xml",
+		"/E/ERC/Patterns/Jhe/tb-Tiki-r-drink.xml",
+		"/E/ERC/Patterns/Jhe/tb-Tiki-f-drink.xml",
+		"/E/ERC/Patterns/Admin/en-US/Main/aa-admin-c-main.xml",
+		"/E/ERC/Patterns/PSTools/Org/ps-org-c-main.xml"
+	],
+	"find":
+	{
+		"height": 34.0
+	},
+	"find_in_files":
+	{
+		"height": 0.0,
+		"where_history":
+		[
+			"<open folders>",
+			"E:\\ERC\\Patterns",
+			"*.xsd",
+			"E:\\ERC\\Patterns",
+			"*.xsd",
+			"E:\\ERC\\Patterns",
+			"E:\\NEXTGEN\\ASI\\Scripts\\",
+			"E:\\NEXTGEN\\ASI\\Scripts\\Smartware\\V3-14\\",
+			"E:\\NEXTGEN\\ASI\\Scripts\\Smartware\\V3-14\\plugins",
+			"E:\\ERC\\Patterns",
+			"E:\\ERC\\Patterns,<open folders>",
+			"E:\\ERC\\Patterns",
+			"<open folders>",
+			"E:\\HRDev",
+			"E:\\ERC\\Patterns",
+			"E:\\",
+			"E:\\ERC\\Patterns,E:\\NEXTGEN\\ASI\\Stylesheets\\Templates",
+			"E:\\ERC\\Patterns",
+			"E:\\ERC\\",
+			"E:\\ERC\\Patterns",
+			"\\\\phmadjilaga02\\Patterns",
+			"C:\\Users\\jilagan\\Documents\\projects\\Ext js"
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			" '",
+			"getHeightAndWidth",
+			"splitns",
+			"Box",
+			"Anim",
+			"lib.Anim",
+			"anim :",
+			"anim",
+			"preanim",
+			"anim",
+			"x-tab-strip-inner",
+			"className",
+			"Ext.Viewport",
+			"initComponent :",
+			"JSONDATAROOT",
+			"remotecomponent",
+			"syncAnchor",
+			"getAlignToXY",
+			"getTargetXY",
+			"syncAnchor",
+			".tooltip",
+			"showTooltip",
+			"edit",
+			"getAlignToXY",
+			"defaultAlign",
+			"tipAnchor",
+			"tooltip",
+			"show",
+			"setXY",
+			"anim",
+			"setXY",
+			"filter",
+			"getAlignToXY",
+			"getAnchorAlign",
+			"getAlignToXY",
+			"defaultAlign",
+			"this.anchorEl.show()",
+			"15px",
+			"x-tip-anchor-top",
+			"x-tip-bl",
+			"errorTip",
+			"x-tool",
+			"tip",
+			"UserID",
+			"GUserID",
+			"v2-",
+			"tip",
+			"anchor-top",
+			"ext-base",
+			"showTooltip",
+			"impersonate",
+			"servername",
+			"userid",
+			"user.userid",
+			"obqa",
+			"userid",
+			"openFirstItemTab",
+			"FunctionType",
+			"OpenFirstItemTab",
+			"Functioncalls",
+			"PanelgroupType",
+			"column",
+			"PanelgroupType",
+			"Panelgroup",
+			"column",
+			"fieldgroup",
+			"column",
+			"@type",
+			"type",
+			"Panelgroup",
+			"hbox",
+			"SBS",
+			"formOutput",
+			"type",
+			"query",
+			"Panelgroup",
+			"PanelGroup",
+			"PanelGourp",
+			"welcome",
+			"General",
+			"compositefield",
+			"PanelGroup",
+			"fieldset",
+			"content",
+			"lblInProcess",
+			"v2-",
+			"from",
+			"patternid",
+			"insert into T_cbaAccessControlList",
+			"T_cbaAccessControlList",
+			"getBrowserEvent",
+			"output",
+			"paging",
+			"sequentialpaging",
+			"<Numberofrecords",
+			"lblPatternName",
+			"pattern",
+			"<Orderby",
+			"html",
+			"title",
+			"header",
+			"title",
+			"Reportheader",
+			"This step is used in the",
+			"This step is used for ",
+			"html",
+			"Form/",
+			"HTML",
+			"list",
+			"Instance",
+			"procname=Remove",
+			"procname",
+			"x-tip-tl",
+			"showTooltip",
+			"name",
+			"isValid",
+			"Ext.ux.grid.RowEditor",
+			"Save",
+			"add",
+			"<Event type=\"",
+			"edit",
+			"listeners",
+			"blur",
+			"fireevent",
+			"beforeedit",
+			"validateedit",
+			"Scriptfunctions",
+			"addListener"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+			"Container",
+			"loan"
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"selected": 0,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "jsleya.js",
+					"settings":
+					{
+						"buffer_size": 10385,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								10319,
+								10319
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 7130.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "jsleya-comp-all.js",
+					"settings":
+					{
+						"buffer_size": 1964,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								862,
+								862
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 513.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "jsleya.html",
+					"settings":
+					{
+						"buffer_size": 1146,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								575,
+								575
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/HTML/HTML.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "style-jsleya.css",
+					"settings":
+					{
+						"buffer_size": 1243,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1020,
+								1020
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/CSS/CSS.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 541.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 0.0
+	},
+	"input":
+	{
+		"height": 31.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"replace":
+	{
+		"height": 64.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+			[
+				"ext",
+				"jscripts/ext-3.4.0/ext-all-debug.js"
+			],
+			[
+				"x3eextremo",
+				"Templates/Report/X3e_ExtRemoteReport.xsl"
+			],
+			[
+				"x3e",
+				"Templates/Report/X3e_ExtReport.xsl"
+			],
+			[
+				"x3ee",
+				"Templates/Report/X3e_Export.xsl"
+			],
+			[
+				"x3ereport",
+				"Templates/Report/X3e_ExtReport.xsl"
+			],
+			[
+				"pf-config-r-managesteps",
+				"Patterns/ProcessFramework/V2-3/ProcessBuilder/pf-config-r-ManageSteps.xml"
+			],
+			[
+				"pf-tools",
+				"Patterns/ProcessFramework/v2-4/AdminTools/pf-tools-r-emailcontacts.xml"
+			],
+			[
+				"onbd-admin-f-userdetails",
+				"Patterns/Onboard/v4-8/AdminConsole/Onbd-admin-f-UserDetails.xml"
+			],
+			[
+				"pf-tools-c-emailcontacts",
+				"Patterns/ProcessFramework/v2-4/AdminTools/pf-tools-c-emailcontacts.xml"
+			],
+			[
+				"aa-users-f-userdetails",
+				"Patterns/Admin/en-US/User/aa-users-f-userDetails.xml"
+			],
+			[
+				"tour-taker",
+				"Patterns/ProcessFramework/v2-4/TourProcessor/pf-tour-r-tourTakerName.xml"
+			],
+			[
+				"pf-config-f-picktoursso",
+				"Patterns/ProcessFramework/V2-3/ProcessBuilder/pf-config-f-pickTourSso.xml"
+			],
+			[
+				"validat",
+				"Schemas/X3e_ExtValidator.xsd"
+			],
+			[
+				"onbd-user-f-profilemain",
+				"Patterns/Onboard/v4-8/ManageNewHires/Onbd-user-f-profileMain.xml"
+			],
+			[
+				"offbd-admin-f-userdetails",
+				"Patterns/Offboard/v2-4/AdminConsole/Offbd-admin-f-UserDetails.xml"
+			],
+			[
+				"formxsl",
+				"Templates/Form/X3e_ExtForm.xsl"
+			],
+			[
+				"formxsd",
+				"Schemas/Form/X3e_ExtForm.xsd"
+			],
+			[
+				"pf-config-f-steps",
+				"Patterns/ProcessFramework/v2-4/ProcessBuilder/pf-config-f-steps.xml"
+			],
+			[
+				"pf-admin-r-adminconsolereport",
+				"Patterns/ProcessFramework/AdminConsole/pf-admin-r-AdminConsoleReport.xml"
+			],
+			[
+				"remotereport",
+				"Templates/Report/X3e_ExtRemoteReport.xsl"
+			],
+			[
+				"olar",
+				"Patterns/Samples/Dev Enablement/Employee/sw-ola-emp-r-rate.xml"
+			],
+			[
+				"olamain",
+				"Patterns/Samples/Dev Enablement/Employee/sw-ola-emp-r-main.xml"
+			],
+			[
+				"extreport",
+				"Templates/Report/X3e_ExtReport.xsl"
+			],
+			[
+				"remoteformxsl",
+				"Templates/Form/X3e_ExtRemoteForm.xsl"
+			],
+			[
+				"remotereportxsl",
+				"Templates/Report/X3e_ExtRemoteReport.xsl"
+			],
+			[
+				"valida",
+				"Schemas/X3e_ExtValidator.xsd"
+			],
+			[
+				"remoteforxsl",
+				"Templates/Form/X3e_ExtRemoteForm.xsl"
+			],
+			[
+				"sw-ola-emp-f-loan",
+				"Patterns/Samples/Dev Enablement/Employee/sw-ola-emp-f-loan.xml"
+			],
+			[
+				"ola",
+				"Patterns/Samples/Dev Enablement/Backup/Employee/sw-ola-emp-c-loan.xml"
+			],
+			[
+				"",
+				"/E/forDep/GeneralConfiguration/pf-admin-r-CopyTourConfiguration.xml"
+			],
+			[
+				"pf-email-r-from",
+				"Patterns/ProcessFramework/V2-3/FromEmailContacts/pf-email-r-fromcontacts.xml"
+			],
+			[
+				"agentxd",
+				"Schemas/SmartWareAgents.xsd"
+			],
+			[
+				"vari",
+				"Patterns/Onboard/v4-8/Analytics/Onbd-analytic-r-UserInProgress.xml"
+			],
+			[
+				"agent",
+				"Patterns/CaseManagement/5.0/AgentDash/Charts/cm-agent-r-opencasesbytopic.xml"
+			],
+			[
+				"agen",
+				"Patterns/Onboard/v4-8/ManageNewHires/Onbd-user-r-UserExists.xml"
+			],
+			[
+				"age",
+				"Patterns/CaseManagement/5.0/AgentDash/Charts/cm-agent-r-firstcallres.xml"
+			],
+			[
+				"agentret",
+				"Patterns/CaseManagement/5.0/AgentDash/Charts/cm-agent-r-opencasesbypriority.xml"
+			],
+			[
+				"agentu",
+				"Patterns/PSTools/Subn/PS-Subn-f-ReportAgents_DuplicateMetaDeletion.xml"
+			],
+			[
+				"aa-docs-f-details",
+				"Patterns/Admin/Documents/aa-docs-f-details.xml"
+			],
+			[
+				"aa-docs-c-tab",
+				"Patterns/Admin/Documents/aa-docs-c-tab.xml"
+			],
+			[
+				"pf-consolenavi",
+				"Patterns/ProcessFramework/V2-3/AllConsoles/pf-console-r-NavigationMenu.xml"
+			],
+			[
+				"extform",
+				"Schemas/Form/X3e_ExtForm.xsd"
+			],
+			[
+				"validxsd",
+				"Schemas/X3e_ExtValidator.xsd"
+			],
+			[
+				"pf-config-r-man",
+				"Patterns/ProcessFramework/V2-3/ProcessBuilder/pf-config-r-ManageSteps.xml"
+			],
+			[
+				"r-main",
+				"Patterns/Samples/Dev Enablement/Employee/sw-ola-emp-r-main.xml"
+			],
+			[
+				"olar-",
+				"Patterns/Samples/Dev Enablement/Employee/sw-ola-emp-r-rate.xml"
+			],
+			[
+				"remoteformxsd",
+				"Schemas/Form/X3e_ExtRemoteForm.xsd"
+			],
+			[
+				"c-loan",
+				"Patterns/Samples/Dev Enablement/Employee/sw-ola-emp-c-loan.xml"
+			],
+			[
+				"r-rate",
+				"Patterns/Samples/Dev Enablement/Employee/sw-ola-emp-r-rate.xml"
+			],
+			[
+				"remotexsd",
+				"Schemas/Form/X3e_ExtRemoteForm.xsd"
+			],
+			[
+				"f-loan",
+				"Patterns/Samples/Dev Enablement/Employee/sw-ola-emp-f-loan.xml"
+			],
+			[
+				"agentxsd",
+				"Schemas/SmartWareAgents.xsd"
+			],
+			[
+				"x3exsd",
+				"Schemas/Form/X3e_ExtForm.xsd"
+			],
+			[
+				"f-loan.xml",
+				"Patterns/Samples/Dev Enablement/Employee/sw-ola-emp-f-loan.xml"
+			],
+			[
+				"remote",
+				"Templates/Report/X3e_ExtRemoteReport.xsl"
+			],
+			[
+				"x3e_report",
+				"Templates/Report/X3e_ExtReport.xsl"
+			],
+			[
+				"r-loan.xml",
+				"Patterns/Samples/Dev Enablement/Backup/Employee/sw-ola-emp-f-loan.xml"
+			],
+			[
+				"sw-ola-emp-r-main",
+				"Patterns/Samples/Dev Enablement/Employee/sw-ola-emp-r-main.xml"
+			],
+			[
+				"sw-ola-emp-c-submain",
+				"Patterns/Samples/Dev Enablement/Employee/sw-ola-emp-c-submain.xml"
+			],
+			[
+				"emp-f-info",
+				"Patterns/Samples/Dev Enablement/Employee/sw-ola-emp-f-info.xml"
+			],
+			[
+				"emp-c-loan",
+				"Patterns/Samples/Dev Enablement/Employee/sw-ola-emp-c-loan.xml"
+			],
+			[
+				"aa-users-f-profilemain",
+				"Patterns/Admin/Users/aa-users-f-profileMain.xml"
+			],
+			[
+				"aa-users-c-profiletab",
+				"Patterns/Admin/Users/aa-users-c-profileTab.xml"
+			],
+			[
+				"aa-users",
+				"Patterns/Admin/Users/aa-users-c-main.xml"
+			],
+			[
+				"ps-org-c-main",
+				"Patterns/PSTools/Org/ps-org-c-main.xml"
+			],
+			[
+				"aa-admin-c-main",
+				"Patterns/Admin/en-US/Main/aa-admin-c-main.xml"
+			],
+			[
+				"cm-dash",
+				"Patterns/CaseManagement/5.0/CaseManagementDashboard/cm-dash-c-main.xml"
+			]
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 500.0,
+		"selected_items":
+		[
+		],
+		"width": 380.0
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 183.0,
+	"status_bar_visible": true
+}

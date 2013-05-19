@@ -45,3 +45,13 @@ table {
 	border-collapse: collapse;
 	border-spacing: 0;
 }
+
+.container {
+	background-color: #58ACFA;
+	/*padding: 8px;*/
+}
+.container-content {
+	background-color: #FAFAFA;
+	/*margin: 2px;*/
+	height: auto;
+}
