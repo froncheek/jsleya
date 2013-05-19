@@ -5,7 +5,7 @@
  * To change this template use File | Settings | File Templates.
  **/
  // {js:leya}
-(function(undefined) {
+(function(curLeya, undefined) {
 var CONST = {
     complete: 'complete'
 };
@@ -31,6 +31,7 @@ ly.fn.extend = function(/*source, [,(abstract,sealed...]*/) {
     if(Object.prototype.isExtensible && !Object.isExtensible(d)) {
         return false;
     }
+
     for(var i=1, len = args.length; i < len;) {
         s = args[i++];
         for(var p in s) {
@@ -71,10 +72,12 @@ ly.fn.extend(ly.fn, {
         }
     }(),
     ready: function(fn) {
+
         if(leya.isDocReady && document.body) {
             fn.call(window);
             return;
         }
+
         leya.isDocReady = true;
         leya.addEvent(eventListeners.ready, function() {
             if (document.readyState === CONST.complete || document.body) {
@@ -103,6 +106,23 @@ ly.fn.extend(ly.fn, {
             }
         }
     },
+    extendIf: function() {
+        var args = arguments,
+        d = args[0] || {},
+        s = args[1];
+
+        if(Object.prototype.isExtensible && !Object.isExtensible(d)) {
+            return false;
+        }
+
+        for(var p in s) {
+            if(!d[p]) {
+                d[p] = s[p];  
+            } 
+        }
+        
+        return d;   
+    },
     isArray: function(o) {
         return Array.isArray(o);
     },
@@ -122,8 +142,7 @@ ly.fn.extend(ly.fn, {
         return /^[\w]+([a-zA-Z\.]+([\w]+))$/.test(ns);
     },
     isClass: function() {
-        var ns;
-        return (arguments.length >= 2 && this.isString(ns = arguments[0]) && ns && this.isNs(ns));
+        var ns; return (arguments.length >= 2 && this.isString(ns = arguments[0]) && ns && this.isNs(ns));
     },
     isDefProp: function() {
 
@@ -145,6 +164,7 @@ ly.fn.extend(ly.fn, {
     },
     ns: function(n, o) {
         o = o || window;
+
         if(n) {
             n = n.split('.');
 
@@ -178,59 +198,91 @@ ly.fn.extend(ly.fn, {
     useVersion: function(v, fn) {
         var fromVersion = this, toVersion;
 
-        if(!this.ly || !(toVersion = this.ly[v]) || !fn || ! this.isFunction(fn)) {
+        if(!this.ly || !(toVersion = this.ly[v]) || !fn || !this.isFunction(fn)) {
             return;
         }
+
         leya = toVersion;
         fn.call(window, fromVersion);
         leya = fromVersion;        
     },
     initClass: function() {
-        var _createConstructor = function() {
-                return function() {
-                    this.init.apply(
-                        leya.extend(this, leya.isObject(arguments[0]) ?  arguments[0] : {})
+        var _createConstructor = function(ns, o, isOverride) {
+                var _init = function() {
+                    var arg = arguments[0];
+
+                    return this.init.apply(
+                        leya.extend(this, leya.isObject(arg[0]) ?  arg[0] : {}), arg
                     );
                 };
-            }, fn;
+
+                if(isOverride) {
+                    leya.extend(_init.prototype, o.base.getPrototypes(), o);
+                    _init.prototype.base = o.base.getPrototypes();
+                } else {
+                    _init.prototype = o;
+                }
+                
+                var _fn = function() {
+                    return new _init(arguments);
+                };
+
+                _fn.namespace = ns;
+
+                leya.extend(_fn, {
+                    getBase: function() {
+                        return _init.prototype.base;
+                    },
+                    getBaseClass: function() {
+                        return o.base;
+                    },
+                    getPrototypes: function() {
+                        return _init.prototype;
+                    },
+                    getName: function() {
+                        return leya.splitns(ns)[1];
+                    },
+                    getNamespace: function() {
+                        return ns;
+                    },
+                    addPrototype: function(k, v) {
+                        _init.prototype[k] = v;
+                    }
+                });
+                
+                return _fn;
+            };
+
+        var _create = function(ns, o, isOverride) {
+                if(this.isClass.apply(this, arguments)) {
+                    var sns = this.splitns(ns);
+
+                    fn = _createConstructor.call(this, ns, o, isOverride);
+                    o = this.ns(sns[0], o.attachTo);
+                    o[sns[1]] = fn;
+                }
+            },
+            fn;
 
         ly.fn.extend(ly.fn, {
             abstract: function(ns, o) {
-                if(this.isClass.apply(this, arguments)) {
-                    fn = _createConstructor();
-                    ns = this.splitns(ns);
-                    fn.prototype = o;
-                    o = this.ns(ns[0], o.attachTo);
-                    o[ns[1]] = fn;
-                }
+                _create.call(this, ns, o);
             },
-            override: function() {
-                return function(ns, o) {
-                    if(this.isClass.apply(this, arguments)) {
-                        fn = _createConstructor();
-                        ns = this.splitns(ns);
-                        fn.prototype = o;
-                        this.extend(fn.prototype.base, o.base.prototype);
-                        //this.extend(fn.prototype.base, o.base.prototype);
-                        o = this.ns(ns[0], o.attachTo);
-                        o[ns[1]] = fn;
-                    }
-                };
-            }()
+            override: function(ns, o) {
+                _create.call(this, ns, o, true);
+            }
         });
 
         return true;
     }()
 });
 
-
-
-
-if(window.leya) {
+if(curLeya) {
     var ver;
 
     if(leya.version != (ver = ly.fn.version)) {
         leya.ly = leya.ly || {};
+
         if(!leya.ly[ver]) {
             leya.ly[ver] = new ly();    
         }
@@ -239,4 +291,4 @@ if(window.leya) {
     window.leya = new ly();    
 }
 
-})();
+})(window.leya);
