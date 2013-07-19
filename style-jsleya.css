@@ -47,11 +47,34 @@ table {
 }
 
 .container {
-	background-color: #58ACFA;
+	background-color: #BDBDBD;
 	/*padding: 8px;*/
 }
 .container-content {
-	background-color: #FAFAFA;
+	background-color: #01A9DB; /*#F79F81; */
+	/*border: 10px solid #A4A4A4;*/
 	/*margin: 2px;*/
 	height: auto;
+	display: block;
+}
+.container-canvas {
+	display: inline-block;
+}
+.container-top-draggable {
+	background-color: gray;
+	cursor: n-resize;
+}
+.container-left-draggable {
+	background-color: gray;
+	display: inline-block;
+	cursor: w-resize;
+}
+.container-right-draggable {
+	background-color: gray;
+	display: inline-block;
+	cursor: e-resize;
+}
+.container-bottom-draggable {
+	background-color: gray;
+	cursor: s-resize;
 }

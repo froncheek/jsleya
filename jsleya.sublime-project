@@ -2,7 +2,8 @@
 	"folders":
 	[
 		{
-			"path": "/D/projects/jsleya"
+			"follow_symlinks": true,
+			"path": "/Volumes/jsleya"
 		}
 	]
 }

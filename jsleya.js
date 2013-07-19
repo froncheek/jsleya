@@ -18,7 +18,7 @@ var win = window,
     id = 1000,
     ly = function() {},
     eventListeners = {},
-    eventObservers = [];
+    eventObservers = {};
 
 ly.fn = ly.prototype;
 
@@ -73,7 +73,14 @@ ly.fn.extend(ly.fn, {
             };
         }
     }(),
-    addObserver: function() {
+    addObserver: function(observer) {
+        leya.each(observer, function(v, k) {
+            if(eventObservers[k]) {
+                eventObservers[k].push(v);
+            } else {
+                eventObservers[k] = [v];
+            }
+        });
     },
     removeObserver: function() {
         
@@ -131,13 +138,13 @@ ly.fn.extend(ly.fn, {
         return d;   
     },
     getHeight: function() {
-        return getHeightAndWidth('Height');
+        return getWidthAndHeight().height;
     },
     getWidth: function() {
-        return getHeightAndWidth('Width');
+        return getWidthAndHeight().width;
     },
     getId: function() {
-        return 'leya-comp-' + (id++);
+        return 'leya-' + (id++);
     },
     isArray: function(o) {
         return Array.isArray(o);
@@ -222,54 +229,137 @@ ly.fn.extend(ly.fn, {
         fn.call(window, fromVersion);
         leya = fromVersion;        
     },
+    element: {
+        appendChild: function(parent, child) {
+            if(parent) {
+                parent.appendChild(child);
+            }
+            return this;
+        },
+        prependChild: function() {
+            return this;
+        },
+        insertChild: function() {
+            return this;
+        },
+        removeChild: function() {
+            return this;
+        },
+        replaceChild: function(parent, oldChild, newChild) {
+            if(parent && oldChild && newChild) {
+                parent.replaceChild(oldChild, newChild);
+            }
+            return this;
+        },
+        getThickness: function(el) {
+            var style = el.style;
+
+            return {
+                horizontal: leya.math.sum(
+                    leya.getDigits(style.paddingLeft),
+                    leya.getDigits(style.paddingRight),
+                    leya.getDigits(style.marginLeft),
+                    leya.getDigits(style.marginRight)
+                ),
+                vertical: leya.math.sum(
+                    leya.getDigits(style.paddingTop),
+                    leya.getDigits(style.paddingBottom),
+                    leya.getDigits(style.marginTop),
+                    leya.getDigits(style.marginBottom)
+                )
+            }
+        }
+    },
+    math: {
+        div: function() {
+            var num = 0;
+
+            for(var i=0, len = arguments.length; i < len;) {
+                num /= arguments[i++];
+            }
+            return num;
+        },
+        mul: function() {
+            var num = 0;
+
+            for(var i=0, len = arguments.length; i < len;) {
+                num *= arguments[i++];
+            }
+            return num;
+        },
+        sum: function() {
+            var num = 0;
+
+            for(var i=0, len = arguments.length; i < len;) {
+                num += arguments[i++];
+            }
+            return num;
+        },
+        sub: function() {
+            var num = 0;
+
+            for(var i=0, len = arguments.length; i < len;) {
+                num -= arguments[i++];
+            }
+            return num;
+        }
+    },
+    getDigits: function(s) {
+        var d = s.match(/(\d+)/) || [0];
+        return leya.parseInt(d[0]);
+    },
+    parseInt: function(o, replaceValue) {
+        var cInt = replaceValue || 0;
+
+        try {
+            cInt = parseInt(o);
+        } catch(ex) {}
+
+        return cInt;
+    },
     initClass: function() {
         var _createConstructor = function(ns, o, isOverride) {
-                var _init = function() {
-                    var arg = arguments[0];
-
+                var _fn = function() {
                     return this.init.apply(
-                        leya.extend(this, leya.isObject(arg[0]) ?  arg[0] : {}), arg
+                        leya.extend(this, leya.isObject(arguments[0]) ?  arguments[0] : {}), arguments
                     );
                 };
 
+                //_fn.prototype = o;    
+
                 if(isOverride) {
-                    leya.extend(_init.prototype, o.base.getPrototypes(), o);
-                    _init.prototype.base = o.base.getPrototypes();
+                    //leya.extendIf(_fn.prototype, o.base.prototype);
+                    //_fn.prototype = new o.base();
+                    //_fn.prototype = o.base.prototype;
+                    leya.extend(_fn.prototype, o);
+                    _fn.prototype.base = o.base.prototype;
                 } else {
-                    _init.prototype = o;
+                    _fn.prototype = o;    
                 }
                 
-                var _fn = function() {
-                    return new _init(arguments);
-                };
-
-                _fn.namespace = ns;
-
-                leya.extend(_fn, {
-                    getBase: function() {
-                        return _init.prototype.base;
-                    },
-                    getBaseClass: function() {
-                        return o.base;
-                    },
-                    getPrototypes: function() {
-                        return _init.prototype;
-                    },
-                    getName: function() {
-                        return leya.splitns(ns)[1];
-                    },
-                    getNamespace: function() {
-                        return ns;
-                    },
-                    addPrototype: function(k, v) {
-                        _init.prototype[k] = v;
-                    }
-                });
+                // leya.extend(_fn.prototype, {
+                //     namespace: ns,
+                //     getBase: function() {
+                //         return o.base;
+                //     },
+                //     getBasePrototype: function() {
+                //         return o.base.prototype;
+                //     },
+                //     getDomDirectory: function() {
+                //         //TODO:implement traverse here
+                //         return this;    
+                //     },
+                //     getName: function() {
+                //         return leya.splitns(ns)[1];
+                //     },
+                //     getNamespace: function() {
+                //         return ns;
+                //     }
+                // });
                 
                 return _fn;
-            };
-
-        var _create = function(ns, o, isOverride) {
+            },
+            _create = function(ns, o, isOverride) {
                 if(this.isClass.apply(this, arguments)) {
                     var sns = this.splitns(ns);
 
@@ -286,6 +376,9 @@ ly.fn.extend(ly.fn, {
             },
             override: function(ns, o) {
                 _create.call(this, ns, o, true);
+            },
+            lib: function(ns, o) {
+
             }
         });
 
@@ -294,34 +387,46 @@ ly.fn.extend(ly.fn, {
 });
 
 function createHtml(parent) {
-    var dom = document.createElement(this.tag),
+    var dom = document.createElement(this.tag || 'div'),
         children = this.children || [],
         style = this.style;
 
-        delete this.style;
-        delete this.children;
+        if(this.children) delete this.children;
 
         ly.fn.extend(dom, this);
 
-        if(children.length) {
-            delete style.height;
-        } else {
-            if(parent) {
-                if(parent.clientHeight) {
-                    style.height -= parent.clientHeight;
-                } else {
-                    style.height -= parent.offsetHeight;
+        if(style) {
+            if(this.style) delete this.style;
+
+            if(children.length) {
+                if(style.height) delete style.height;
+            } else {
+                if(parent && style) {
+                    var verticalThickness = ly.fn.element.getThickness(parent).vertical,
+                        horizontalThickness = ly.fn.element.getThickness(parent).horizontal;
+
+                    //style.height = style.height || 0;
+                    //style.width = style.width || 0;
+
+                    if(parent.clientHeight) {
+                        //style.height += parent.clientHeight + verticalThickness;
+                        //style.width += parent.clientWidth + horizontalThickness;
+                    } else {
+                        //style.height += parent.offsetHeight + verticalThickness;
+                        //style.width += parent.offsetWidth + horizontalThickness;
+                    }
                 }
             }
-        }
 
-        ly.fn.extend(dom.style, style);
+            ly.fn.extend(dom.style, style);
+        }
         dom.id = (this.id ? this.id : leya.getId());
 
-        if(this.renderTo) {
-            this.renderTo.appendChild(dom);
-        } else {
-            parent.appendChild(dom);
+        // if(this.renderTo) {
+        //     this.renderTo.appendChild(dom);
+        // } else 
+        if(doc.body) {
+            doc.body.appendChild(dom);
         }
 
         ly.fn.each(children, function(v) {
@@ -331,18 +436,24 @@ function createHtml(parent) {
     return dom;
 };
 
-function getHeightAndWidth(hw) {
-    var s;
+function getWidthAndHeight() {
+    var hw = {
+        height: 0,
+        width: 0
+    };
 
-    if(s = win['inner' + hw]) {
-        return s;
+    if(win.innerHeight) {
+        hw.height = win.innerHeight;
+        hw.width = win.innerWidth;
+    } else if(doc.body && doc.body.clientHeight) {
+        hw.height = doc.body.clientHeight;
+        hw.width = doc.body.clientWidth;
+    } else if(doc.documentElement && doc.documentElement.clientHeight) {
+        hw.height = doc.documentElement.clientHeight;
+        hw.width = doc.documentElement.clientWidth;
     }
-    if(doc.body && (s = doc.body['client' + hw])) {
-        return s;
-    }
-    if(doc.documentElement && (s = doc.documentElement['client' + hw])) {
-        return s;
-    }
+
+    return hw;
 };
 
 if(curLeya) {
@@ -360,8 +471,8 @@ if(curLeya) {
 }
 
 leya.abstract('leya.Element', {
-    init: function(prop) {
-        this.dom = createHtml.call(this);
+    init: function(prop, events) {
+        this.createLayout(prop);
     },
     addClass: function(className) {
         var dom = this.dom || this;
@@ -372,6 +483,9 @@ leya.abstract('leya.Element', {
             dom.className += className;
         }
     },
+    createLayout: function(prop) {
+        this.dom = createHtml.call(prop);
+    },
     removeClass: function(className) {
         var dom = this.dom || this;
 
@@ -380,6 +494,9 @@ leya.abstract('leya.Element', {
         } else {
             //dom.className += className;
         }
+    },
+    get: function() {
+
     },
     addEvent: function(t, l, u, a) {
         if(document.addEventListener) {
@@ -400,9 +517,14 @@ leya.abstract('leya.Element', {
     }()
 });
 
-
 leya.addEvent(window, 'resize', function() {
-    console.log(arguments);
+    var args = arguments;
+
+    leya.each(eventObservers.resize, function(v, k) {
+        if(v.fn) {
+            v.fn.call(v.scope, args);
+        }
+    });
 });
 
 })(window.leya);
