@@ -78,3 +78,6 @@ table {
 	background-color: gray;
 	cursor: s-resize;
 }
+.content {
+	display: inline-block;
+}

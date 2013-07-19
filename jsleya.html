@@ -4,18 +4,18 @@
 	<link rel="stylesheet" type="text/css" href="style-jsleya.css">
 	<script type="text/javascript" src="js-1.8.js"></script>
 	<script type="text/javascript" src="jsleya.js"></script>
-	<script type="text/javascript" src="jsleya-comp-all.js"></script>
+	<script type="text/javascript" src="container/leya.Container.js"></script>
 	<script type="text/javascript">
 
 		leya.ready(function() {
 			
+			var childContainer = new leya.Container();
+
 		    var Container1 = new leya.Container({
-		        fontColor: 'gray',
-		        background: 'black',
-		        //height: '100px',
-		        title: 'this is Container 1',
-		        html: 'this is the content 1'
+		    	//contents: [childContainer]
 		    });
+
+		    Container1.show();
 /*/
 		    var Container2 = new leya.Container({
 		        fontColor: 'gray',

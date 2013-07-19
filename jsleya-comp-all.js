@@ -34,11 +34,11 @@ leya.abstract('leya.Container', {
             bodyWidth = leya.getWidth(),
             thickness = ((this.resizable === true ? border : 0) * 2);
 
-        if(this.contents && this.contents.count > 0) {
+        if(this.contents && this.contents.length > 0) {
             canvas.children = [{
                 className: 'container-content',
                 style: {
-                    height: bodyHeight - (this.padding * 4),
+                    height: bodyHeight - thickness,
                     width: 25
                 }
             }];
@@ -106,14 +106,14 @@ leya.abstract('leya.Container', {
         if(this.contents && this.contents.length > 0) {
             // contents resize
         } else if(this.el) {
-            var canvas = this.el.dom.getElementsByClassName('container-canvas')[0],
+            var canvas = this.el.findByClass('container-canvas')[0],
                 totalWidth = bodyWidth - thickness,
                 totalHeight = bodyHeight - thickness;
 
             if(this.resizable === true) {
-                var innerWrapper = this.el.dom.getElementsByClassName('container-inner')[0],
-                    ld = this.el.dom.getElementsByClassName('container-left-draggable')[0],
-                    rd = this.el.dom.getElementsByClassName('container-right-draggable')[0];
+                var innerWrapper = this.el.findByClass('container-inner')[0], //getElementsByClassName('container-inner')[0],
+                    ld = this.el.findByClass('container-left-draggable')[0],
+                    rd = this.el.findByClass('container-right-draggable')[0];
 
                 canvas.style.height = totalHeight;
                 canvas.style.width = totalWidth;
@@ -128,23 +128,37 @@ leya.abstract('leya.Container', {
     },
     render: function() {    
         if(!this.el) {
-            this.el = new leya.Element(this.tpl, 'wa');
+            this.el = new leya.Element(this.tpl);
         }
-        this.show();
+        this.renderItems();
+        //this.show();
     },
     show: function() {
-        document.body.appendChild(this.el.dom);
+        if(this.renderTo) {
+            this.renderTo.el.dom.appendChild(this.el.dom);
+        } else {
+            document.body.appendChild(this.el.dom);
+        }
     },
     renderItems: function() {
     	var self = this,
-    		items;
+    		content;
 
-    	if(items = this.items) {
-    		leya.each(items, function(item) {
-    			self.contentEl.appendChild(item.el);	
+    	if(content = this.contents) {
+    		leya.each(content, function(content) {
+                content.parentCt = self;
+                content.el.addClass('content');
+                self.el.findByClass('container-content')[0].appendChild(content.el.dom);
     		});
-    		
     	}
+    },
+    getEl: function() {
+        return this.el;
+    },
+    getDom: function() {
+        if(this.el) {
+            return this.el.dom;
+        }
     }
 });
 

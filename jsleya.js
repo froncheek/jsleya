@@ -425,9 +425,9 @@ function createHtml(parent) {
         // if(this.renderTo) {
         //     this.renderTo.appendChild(dom);
         // } else 
-        if(doc.body) {
-            doc.body.appendChild(dom);
-        }
+        //if(doc.body) {
+        //    doc.body.appendChild(dom);
+        //}
 
         ly.fn.each(children, function(v) {
             dom.appendChild(createHtml.call(v, dom));
@@ -470,8 +470,14 @@ if(curLeya) {
     window.leya = new ly();    
 }
 
+var el = {
+    eq: function(idx) {
+        return this.item(idx);
+    }
+};
+
 leya.abstract('leya.Element', {
-    init: function(prop, events) {
+    init: function(prop) {
         this.createLayout(prop);
     },
     addClass: function(className) {
@@ -480,7 +486,7 @@ leya.abstract('leya.Element', {
         if(dom.classList) {
             dom.classList.add(className);
         } else {
-            dom.className += className;
+            dom.className += ' ' + className;
         }
     },
     createLayout: function(prop) {
@@ -495,8 +501,16 @@ leya.abstract('leya.Element', {
             //dom.className += className;
         }
     },
+    find: function() {},
+    findBy: function(fn, scope) {
+        return fn.call(scope || this);
+    },
+    findByClass: function(className) {
+        return leya.extend(this.dom.getElementsByClassName(className), el);
+    },
+    findByTag: function() {},
     get: function() {
-
+        return this.dom;
     },
     addEvent: function(t, l, u, a) {
         if(document.addEventListener) {
