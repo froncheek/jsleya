@@ -1,4 +1,3 @@
-
 leya.abstract('leya.Container', {
 	//attachTo: ly.fn,
     border: 8,
@@ -62,7 +61,7 @@ leya.abstract('leya.Container', {
                 className: 'container-top-draggable',
                 style: {
                     height: border
-                }   
+                }
             }, 
             innerWrapper, {
                 className: 'container-bottom-draggable',
@@ -111,7 +110,7 @@ leya.abstract('leya.Container', {
                 totalHeight = bodyHeight - thickness;
 
             if(this.resizable === true) {
-                var innerWrapper = this.el.findByClass('container-inner')[0], //getElementsByClassName('container-inner')[0],
+                var innerWrapper = this.el.findByClass('container-inner').eq(0), //getElementsByClassName('container-inner')[0],
                     ld = this.el.findByClass('container-left-draggable')[0],
                     rd = this.el.findByClass('container-right-draggable')[0];
 
@@ -131,14 +130,23 @@ leya.abstract('leya.Container', {
             this.el = new leya.Element(this.tpl);
         }
         this.renderItems();
-        //this.show();
+
+        this.rendered = true;
     },
-    show: function() {
-        if(this.renderTo) {
-            this.renderTo.el.dom.appendChild(this.el.dom);
+    show: function(dom) {
+        if(!this.showed && (dom || (dom = this.renderTo))) {
+            if(dom.appendChild) {
+                dom.appendChild(this.el.dom);
+            } else {
+                dom.el.dom.appendChild(this.el.dom);
+            }
+            this.showed = true;
         } else {
-            document.body.appendChild(this.el.dom);
+            this.el.removeClass('leya-hidden');
         }
+    },
+    hide: function() {
+        this.el.addClass('leya-hidden');
     },
     renderItems: function() {
     	var self = this,
@@ -148,7 +156,7 @@ leya.abstract('leya.Container', {
     		leya.each(content, function(content) {
                 content.parentCt = self;
                 content.el.addClass('content');
-                self.el.findByClass('container-content')[0].appendChild(content.el.dom);
+                content.show(self.el.findByClass('container-content').eq(0));
     		});
     	}
     },
@@ -161,14 +169,3 @@ leya.abstract('leya.Container', {
         }
     }
 });
-
-
-// leya.override('test.Sample', {
-//     base: leya.Container,
-//     init: function() {
-//         this.base.init.call(this);
-//     },
-//     render: function() {
-//         this.base.render.call(this);
-//     }
-// });

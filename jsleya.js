@@ -177,13 +177,13 @@ ly.fn.extend(ly.fn, {
         return eventListeners;
     },*/
     getBody: function() {
-        /*var body;
+        var body;
 
-        if(!body = document.body) {
+        if(!(body = document.body)) {
 
         } else {
             return body;
-        }*/
+        }
     },
     ns: function(n, o) {
         o = o || window;
@@ -470,7 +470,13 @@ if(curLeya) {
     window.leya = new ly();    
 }
 
-var el = {
+var els = {
+    first: function() {
+        
+    },
+    last: function() {
+
+    },
     eq: function(idx) {
         return this.item(idx);
     }
@@ -506,7 +512,7 @@ leya.abstract('leya.Element', {
         return fn.call(scope || this);
     },
     findByClass: function(className) {
-        return leya.extend(this.dom.getElementsByClassName(className), el);
+        return leya.extend(this.dom.getElementsByClassName(className), els);
     },
     findByTag: function() {},
     get: function() {
