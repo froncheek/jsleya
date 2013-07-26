@@ -8,6 +8,7 @@
 	/*margin: 5px;*/
 	/*height: auto;*/
 	display: block;
+	padding: 10 10 0 10;
 }
 .container-canvas {
 	display: inline-block;
@@ -42,5 +43,5 @@
 }
 
 .container-content .container {
-	margin: 10px;
+	margin-bottom: 10;
 }

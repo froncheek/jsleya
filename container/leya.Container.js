@@ -140,15 +140,14 @@ leya.abstract('leya.Container', {
             ld = this.el.findByClass('container-left-draggable').eq(0),
             rd = this.el.findByClass('container-right-draggable').last();
 
-        ld.setHeight(canvas.getHeight());
-        rd.setHeight(canvas.getHeight());
+        
         if(!this.parentCt) {
             canvas.setWidth(leya.getWidth() - (this.border * 2));
             innerWrapper.setWidth(canvas.getWidth() + (this.border * 2));
             innerWrapper.setHeight(canvas.getHeight());
-            ld.setHeight(canvas.getHeight());
-        rd.setHeight(canvas.getHeight());
         }
+        ld.setHeight(canvas.getHeight());
+        rd.setHeight(canvas.getHeight());
     },
     show: function(dom) {
         if(!this.showed && (dom || (dom = this.renderTo))) {
