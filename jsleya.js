@@ -101,7 +101,7 @@ ly.fn.extend(ly.fn, {
         }, false);
     },
     each: function(o, fn, sc) {
-        var len = o.length,
+        var len = o ? o.length || 0 : 0,
             isObj = len === undefined || this.isObject(o);
 
         if(isObj) {
@@ -470,15 +470,26 @@ if(curLeya) {
     window.leya = new ly();    
 }
 
+var el = {
+    setHeight: function(h) {
+        this.style.height = h;
+
+        return this;
+    },
+    getHeight: function() {
+        return this.clientHeight;
+    }
+};
+
 var els = {
     first: function() {
-        
+        return leya.extend(this.item(0), el);
     },
     last: function() {
-
+        return leya.extend(this.item(this.length - 1), el);
     },
     eq: function(idx) {
-        return this.item(idx);
+        return leya.extend(this.item(idx), el);
     }
 };
 
@@ -517,6 +528,12 @@ leya.abstract('leya.Element', {
     findByTag: function() {},
     get: function() {
         return this.dom;
+    },
+    getHeight: function() {
+        return this.dom.clientHeight;
+    },
+    getWidth: function() {
+        return this.dom.clientWidth;  
     },
     addEvent: function(t, l, u, a) {
         if(document.addEventListener) {

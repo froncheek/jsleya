@@ -11,6 +11,7 @@ leya.abstract('leya.Container', {
             },
             canvas = {
                 className: 'container-canvas',
+                innerHTML: this.html || null,
                 style: {}
             },
             leftDrag = {
@@ -37,20 +38,20 @@ leya.abstract('leya.Container', {
             canvas.children = [{
                 className: 'container-content',
                 style: {
-                    height: bodyHeight - thickness,
-                    width: 25
+                    //height: bodyHeight - thickness,
+                    //width: 25
                 }
             }];
         } else {
-            canvas.style.height = bodyHeight - thickness;
-            canvas.style.width = bodyWidth - thickness;
+            //canvas.style.height = bodyHeight - thickness;
+            //canvas.style.width = bodyWidth - thickness;
         }
 
         if(this.resizable === true) {
-            leftDrag.style.height = bodyHeight - thickness;
-            rightDrag.style.height = bodyHeight - thickness;
+            //leftDrag.style.height = bodyHeight - thickness;
+            //rightDrag.style.height = bodyHeight - thickness;
             
-            innerWrapper.style.width = bodyWidth;
+            //innerWrapper.style.width = bodyWidth;
             innerWrapper.children = [
                 leftDrag, 
                 canvas,
@@ -85,7 +86,7 @@ leya.abstract('leya.Container', {
                 fn: self['on' + v],
                 scope: self
             }
-            leya.addObserver(op);
+            //leya.addObserver(op);
             delete self['on' + v];
         });
     },
@@ -129,9 +130,16 @@ leya.abstract('leya.Container', {
         if(!this.el) {
             this.el = new leya.Element(this.tpl);
         }
-        this.renderItems();
-
+        
         this.rendered = true;
+    },
+    doLayout: function() {
+        var canvas = this.el.findByClass('container-canvas').eq(0),
+            ld = this.el.findByClass('container-left-draggable').eq(0),
+            rd = this.el.findByClass('container-right-draggable').last();
+
+        ld.setHeight(canvas.getHeight());
+        rd.setHeight(canvas.getHeight());
     },
     show: function(dom) {
         if(!this.showed && (dom || (dom = this.renderTo))) {
@@ -140,10 +148,12 @@ leya.abstract('leya.Container', {
             } else {
                 dom.el.dom.appendChild(this.el.dom);
             }
+            this.renderItems();
             this.showed = true;
         } else {
             this.el.removeClass('leya-hidden');
         }
+        this.doLayout();
     },
     hide: function() {
         this.el.addClass('leya-hidden');
@@ -157,6 +167,7 @@ leya.abstract('leya.Container', {
                 content.parentCt = self;
                 content.el.addClass('content');
                 content.show(self.el.findByClass('container-content').eq(0));
+                self.el.findByClass('container-content').eq(0).innerHTML += '<br>';
     		});
     	}
     },

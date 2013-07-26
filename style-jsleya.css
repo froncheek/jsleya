@@ -5,23 +5,26 @@
 .container-content {
 	background-color: #01A9DB; /*#F79F81; */
 	/*border: 10px solid #A4A4A4;*/
-	/*margin: 2px;*/
-	height: auto;
+	/*margin: 5px;*/
+	/*height: auto;*/
 	display: block;
 }
 .container-canvas {
 	display: inline-block;
+	vertical-align: top;
 }
 .container-top-draggable {
 	background-color: gray;
 	cursor: n-resize;
 }
 .container-left-draggable {
+	vertical-align: top;
 	background-color: gray;
 	display: inline-block;
 	cursor: w-resize;
 }
 .container-right-draggable {
+	vertical-align: top;
 	background-color: gray;
 	display: inline-block;
 	cursor: e-resize;
@@ -36,4 +39,8 @@
 
 .leya-hidden {
 	display: none;
+}
+
+.container-content .container {
+	margin: 10px;
 }
