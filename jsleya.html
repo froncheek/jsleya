@@ -14,7 +14,7 @@
 				html: '<input type="text"><input type="button" value="Clear"><input type="button" value="Search"></br><input type="text"><input type="button" value="Button 2">'
 			});
 			var childContainer2 = new leya.Container({
-				html: '<input type="text"><input type="button" value="Clear"><input type="button" value="Search">',
+				html: '<input type="button" value="Clear"><input type="button" value="Search">',
 				contents: [childContainer1]
 			});
 
@@ -22,8 +22,12 @@
 				html: '<input type="text"><input type="button" value="Button 2"></br><input type="text"><input type="button" value="Button 2"></br><input type="text"><input type="button" value="Button 2">'
 			});
 
+			var childContainer4 = new leya.Container({
+				html: '<input type="text"><input type="button" value="Button 2"></br><input type="text"><input type="button" value="Button 2"></br><input type="text"><input type="button" value="Button 2">'
+			});
+
 		    var Container1 = new leya.Container({
-		    	contents: [childContainer2, childContainer3],
+		    	contents: [childContainer2, childContainer3, childContainer4],
 		    	//contents: [childContainer3],
 		    	//html: '<input type="text"><input type="button" value="Button 2"></br><input type="text"><input type="button" value="Button 2"></br><input type="text"><input type="button" value="Button 2">',
 		    	renderTo: leya.getBody()

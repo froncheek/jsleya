@@ -86,7 +86,7 @@ leya.abstract('leya.Container', {
                 fn: self['on' + v],
                 scope: self
             }
-            //leya.addObserver(op);
+            leya.addObserver(op);
             delete self['on' + v];
         });
     },
@@ -98,33 +98,34 @@ leya.abstract('leya.Container', {
         this.render();
     },
     onresize: function() {
-        var border = this.border || 0,
-            bodyHeight = leya.getHeight(),
-            bodyWidth = leya.getWidth(),
-            thickness = ((this.resizable === true ? border : 0) * 2);
+        this.doLayout();
+        // var border = this.border || 0,
+        //     bodyHeight = leya.getHeight(),
+        //     bodyWidth = leya.getWidth(),
+        //     thickness = ((this.resizable === true ? border : 0) * 2);
 
-        if(this.contents && this.contents.length > 0) {
-            // contents resize
-        } else if(this.el) {
-            var canvas = this.el.findByClass('container-canvas')[0],
-                totalWidth = bodyWidth - thickness,
-                totalHeight = bodyHeight - thickness;
+        // if(this.contents && this.contents.length > 0) {
+        //     // contents resize
+        // } else if(this.el) {
+        //     var canvas = this.el.findByClass('container-canvas')[0],
+        //         totalWidth = bodyWidth - thickness,
+        //         totalHeight = bodyHeight - thickness;
 
-            if(this.resizable === true) {
-                var innerWrapper = this.el.findByClass('container-inner').eq(0), //getElementsByClassName('container-inner')[0],
-                    ld = this.el.findByClass('container-left-draggable')[0],
-                    rd = this.el.findByClass('container-right-draggable')[0];
+        //     if(this.resizable === true) {
+        //         var innerWrapper = this.el.findByClass('container-inner').eq(0), //getElementsByClassName('container-inner')[0],
+        //             ld = this.el.findByClass('container-left-draggable')[0],
+        //             rd = this.el.findByClass('container-right-draggable')[0];
 
-                canvas.style.height = totalHeight;
-                canvas.style.width = totalWidth;
-                innerWrapper.style.width = bodyWidth;
-                ld.style.height = bodyHeight - thickness;
-                rd.style.height = bodyHeight - thickness;
-            } else {
-                canvas.style.width = 0;
-                canvas.style.height = bodyHeight - thickness;
-            }
-        }
+        //         canvas.style.height = totalHeight;
+        //         canvas.style.width = totalWidth;
+        //         innerWrapper.style.width = bodyWidth;
+        //         ld.style.height = bodyHeight - thickness;
+        //         rd.style.height = bodyHeight - thickness;
+        //     } else {
+        //         canvas.style.width = 0;
+        //         canvas.style.height = bodyHeight - thickness;
+        //     }
+        // }
     },
     render: function() {    
         if(!this.el) {
@@ -134,12 +135,20 @@ leya.abstract('leya.Container', {
         this.rendered = true;
     },
     doLayout: function() {
-        var canvas = this.el.findByClass('container-canvas').eq(0),
+        var innerWrapper = this.el.findByClass('container-inner').eq(0),
+            canvas = this.el.findByClass('container-canvas').eq(0),
             ld = this.el.findByClass('container-left-draggable').eq(0),
             rd = this.el.findByClass('container-right-draggable').last();
 
         ld.setHeight(canvas.getHeight());
         rd.setHeight(canvas.getHeight());
+        if(!this.parentCt) {
+            canvas.setWidth(leya.getWidth() - (this.border * 2));
+            innerWrapper.setWidth(canvas.getWidth() + (this.border * 2));
+            innerWrapper.setHeight(canvas.getHeight());
+            ld.setHeight(canvas.getHeight());
+        rd.setHeight(canvas.getHeight());
+        }
     },
     show: function(dom) {
         if(!this.showed && (dom || (dom = this.renderTo))) {

@@ -476,8 +476,16 @@ var el = {
 
         return this;
     },
+    setWidth: function(w) {
+        this.style.width = w;
+
+        return this;
+    },
     getHeight: function() {
         return this.clientHeight;
+    },
+    getWidth: function() {
+        return this.clientWidth;
     }
 };
 
