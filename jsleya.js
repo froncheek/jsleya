@@ -229,6 +229,9 @@ ly.fn.extend(ly.fn, {
         fn.call(window, fromVersion);
         leya = fromVersion;        
     },
+    createEl: function(elc){
+        var el = document.createElement(elc.tag);
+    },
     element: {
         appendChild: function(parent, child) {
             if(parent) {
@@ -329,10 +332,10 @@ ly.fn.extend(ly.fn, {
 
                 if(isOverride) {
                     //leya.extendIf(_fn.prototype, o.base.prototype);
-                    //_fn.prototype = new o.base();
+                    _fn.prototype = new o.base();
                     //_fn.prototype = o.base.prototype;
                     leya.extend(_fn.prototype, o);
-                    _fn.prototype.base = o.base.prototype;
+                    _fn.base = o.base.prototype;
                 } else {
                     _fn.prototype = o;    
                 }
@@ -470,7 +473,22 @@ if(curLeya) {
     window.leya = new ly();    
 }
 
-var el = {
+var els = {
+    first: function() {
+        return this.item(0);
+    },
+    last: function() {
+        return this.item(this.length - 1);
+    },
+    eq: function(idx) {
+        return this.item(idx);
+    }
+};
+
+leya.extend(Node.prototype, {
+    prependChild: function(el, bel) {
+        return this.insertBefore(el, bel || this.firstChild);
+    },
     setHeight: function(h) {
         this.style.height = h;
 
@@ -486,20 +504,22 @@ var el = {
     },
     getWidth: function() {
         return this.clientWidth;
-    }
-};
+    },
+    addStyle: function(key, val) {
+        var el = this;
 
-var els = {
-    first: function() {
-        return leya.extend(this.item(0), el);
+        if(leya.isObject(key)) {
+            leya.each(key, function(val, key) {
+                el.style[key] = val;
+            });
+        } else {
+            this[key] = val;
+        }
     },
-    last: function() {
-        return leya.extend(this.item(this.length - 1), el);
-    },
-    eq: function(idx) {
-        return leya.extend(this.item(idx), el);
+    createEl: function(o) {
+        return this.appendChild(new leya.Element(o).dom);
     }
-};
+});
 
 leya.abstract('leya.Element', {
     init: function(prop) {
@@ -513,6 +533,15 @@ leya.abstract('leya.Element', {
         } else {
             dom.className += ' ' + className;
         }
+    },
+    appendTo: function(el) {
+        el.appendChild(this.dom);
+    },
+    prependTo: function(el) {
+        el.prependChild(this.dom);
+    },
+    createEl: function() {
+
     },
     createLayout: function(prop) {
         this.dom = createHtml.call(prop);

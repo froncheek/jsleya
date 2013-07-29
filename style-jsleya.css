@@ -2,13 +2,15 @@
 	background-color: #BDBDBD;
 	/*padding: 8px;*/
 }
+.container-contents,
 .container-content {
-	background-color: #01A9DB; /*#F79F81; */
+	/*background-color: #01A9DB; /*#F79F81; */
+	background-color: white;
 	/*border: 10px solid #A4A4A4;*/
 	/*margin: 5px;*/
 	/*height: auto;*/
 	display: block;
-	padding: 10 10 0 10;
+	/*padding: 10 10 10 10;*/
 }
 .container-canvas {
 	display: inline-block;
@@ -42,6 +44,35 @@
 	display: none;
 }
 
+.leya-shadow {
+	box-shadow: 0px 5px 10px #888888;
+}
+.leya-draggable {
+	cursor: move;
+}
+
 .container-content .container {
-	margin-bottom: 10;
+	/*margin-bottom: 10;*/
+}
+
+.panel-title {
+	padding: 5px;
+	background-color: #99CCFF;
+	font-family: Verdana, Geneva, sans-serif;
+	font-size: 12;
+	user-select: none;
+	-khtml-user-select: none;
+	-webkit-user-select: none;
+	-ms-user-select: none;
+}
+
+.button-text {
+	padding: 5px;
+	font-family: Verdana, Geneva, sans-serif;
+	font-size: 12;
+	cursor: pointer;
+	user-select: none;
+	-khtml-user-select: none;
+	-webkit-user-select: none;
+	-ms-user-select: none;
 }
