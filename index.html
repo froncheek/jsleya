@@ -9,9 +9,17 @@
 	<script type="text/javascript" src="container/leya.Panel.js"></script>
 	<script type="text/javascript" src="container/leya.panel.Control.js"></script>
 	<script type="text/javascript" src="container/leya.Button.js"></script>
+	<script type="text/javascript" src="data/leya.data.DataTable.js"></script>
 	<script type="text/javascript">
 
 		leya.ready(function() {
+
+			dt = new leya.data.DataTable({
+				root: 'd',
+				url: 'data/data.json'
+			});
+			
+			dt.load();
 
 			var box1 = new leya.Panel({
 				title: 'This is a Box!'
@@ -27,17 +35,6 @@
 
 			var panelWithButton = new leya.Panel({
 				title: 'Panel with buttons example',
-				controlPanels: {
-					top: [
-						new leya.panel.Control({
-							contents: [
-								new leya.Button({
-									text: 'Tbar'
-								})
-							]
-						})
-					]
-				},
 				contents: [ 
 					new leya.Button({
 						text: 'Button 1'

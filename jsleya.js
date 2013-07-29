@@ -45,6 +45,74 @@ ly.fn.extend = function(/*source, [,(abstract,sealed...]*/) {
 };
 
 ly.fn.extend(ly.fn, {
+    parseXML: function() {
+        if (typeof window.DOMParser != "undefined") {
+
+            return function(xmlStr) {
+                return ( new window.DOMParser() ).parseFromString(xmlStr, "text/xml");
+            };
+        } else if (typeof window.ActiveXObject != "undefined" &&
+               new window.ActiveXObject("Microsoft.XMLDOM")) {
+
+            return function(xmlStr) {
+                var xmlDoc = new window.ActiveXObject("Microsoft.XMLDOM");
+                xmlDoc.async = "false";
+                xmlDoc.loadXML(xmlStr);
+                return xmlDoc;
+            };
+        } else {
+            return function() {
+                return;        
+            }
+        }
+    }(),
+    parseJSON: function(s) {
+        try {
+            return JSON.parse(s);
+        } catch(e) {}
+
+        return;
+    },
+    httpReq: function(req) {
+        var xmlhttp,
+            method = req.method || 'GET';
+
+        if (window.XMLHttpRequest) {
+            xmlhttp = new XMLHttpRequest();
+        } else {
+            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        xmlhttp.onreadystatechange = function() {
+            if(xmlhttp.readyState == 4) {
+                if(xmlhttp.status == 200) {
+                    if(req.success) {
+                        req.success.call(req, xmlhttp);    
+                    }
+                    if(req.onJSON) {
+                        try {
+                            req.onJSON.call(req, leya.parseJSON(xmlhttp.response));
+                        } catch(e) {}
+                        return;
+                    }
+                    if(req.onXML) {
+                        try {
+                            req.onXML.call(req, leya.parseXML(xmlhttp.response));
+                        } catch(e) {}
+                        return;
+                    }
+                    if(req.onElse) {
+
+                    }
+                } else {
+                    if(req.failed) {
+                        req.failed.call(req, xmlhttp);    
+                    }
+                }
+            }
+        };
+        xmlhttp.open(method, req.url, true);
+        xmlhttp.send();
+    },
     addEvent: function(/*type, listener, [useCapture], [aWantsUntrusted]*/) {
         if(document.addEventListener) {
             eventListeners.ready = 'DOMContentLoaded';
