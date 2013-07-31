@@ -1,0 +1,73 @@
+<html>
+<head>
+	<title>{js:leya}</title>
+	<link rel="stylesheet" type="text/css" href="style-jsleya-reset.css">
+	<link rel="stylesheet" type="text/css" href="style-jsleya.css">
+	<script type="text/javascript" src="js-1.8.js"></script>
+	<script type="text/javascript" src="jsleya.js"></script>
+	<script type="text/javascript" src="container/leya.Container.js"></script>
+	<script type="text/javascript">
+
+		leya.ready(function() {
+			
+			var childContainer1 = new leya.Container({
+				html: '<input type="text"><input type="button" value="Clear"><input type="button" value="Search"></br><input type="text"><input type="button" value="Button 2">'
+			});
+			var childContainer2 = new leya.Container({
+				html: '<input type="button" value="Clear"><input type="button" value="Search">',
+				contents: [childContainer1]
+			});
+
+			var childContainer3 = new leya.Container({
+				html: '<input type="text"><input type="button" value="Button 2"></br><input type="text"><input type="button" value="Button 2"></br><input type="text"><input type="button" value="Button 2">'
+			});
+
+			var childContainer4 = new leya.Container({
+				html: '<input type="text"><input type="button" value="Button 2"></br><input type="text"><input type="button" value="Button 2"></br><input type="text"><input type="button" value="Button 2">'
+			});
+
+		    var Container1 = new leya.Container({
+		    	contents: [childContainer2, childContainer3, childContainer4],
+		    	//contents: [childContainer3],
+		    	//html: '<input type="text"><input type="button" value="Button 2"></br><input type="text"><input type="button" value="Button 2"></br><input type="text"><input type="button" value="Button 2">',
+		    	renderTo: leya.getBody()
+		    });
+
+		    Container1.show();
+/*/
+		    var Container2 = new leya.Container({
+		        fontColor: 'gray',
+		        background: 'black',
+		        height: '100px',
+		        title: 'this is Container 2',
+		        html: 'this is the content 2'
+		    });
+
+		    var Container3 = new leya.Container({
+		        fontColor: 'gray',
+		        background: 'black',
+		        //height: '100px',
+		        title: 'this is title2',
+		        items: [Container2, Container1]
+		    });
+			//*/
+
+			// var sample = new test.Sample({
+			// 	title: 'Sample Title'
+			// });
+
+		/*var Container1 = new leya.Container({
+		        fontColor: 'gray',
+		        background: 'black',
+		        height: '100px',
+		        title: 'this is Container 1',
+		        html: 'this is the content 1'
+		    });
+*/
+		});
+
+	</script>
+</head>
+<body>
+</body>
+</html>

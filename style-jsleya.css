@@ -1,0 +1,78 @@
+.container {
+	background-color: #BDBDBD;
+	/*padding: 8px;*/
+}
+.container-contents,
+.container-content {
+	/*background-color: #01A9DB; /*#F79F81; */
+	background-color: white;
+	/*border: 10px solid #A4A4A4;*/
+	/*margin: 5px;*/
+	/*height: auto;*/
+	display: block;
+	/*padding: 10 10 10 10;*/
+}
+.container-canvas {
+	display: inline-block;
+	vertical-align: top;
+}
+.container-top-draggable {
+	background-color: gray;
+	cursor: n-resize;
+}
+.container-left-draggable {
+	vertical-align: top;
+	background-color: gray;
+	display: inline-block;
+	cursor: w-resize;
+}
+.container-right-draggable {
+	vertical-align: top;
+	background-color: gray;
+	display: inline-block;
+	cursor: e-resize;
+}
+.container-bottom-draggable {
+	background-color: gray;
+	cursor: s-resize;
+}
+.content {
+	display: inline-block;
+}
+
+.leya-hidden {
+	display: none;
+}
+
+.leya-shadow {
+	box-shadow: 0px 5px 10px #888888;
+}
+.leya-draggable {
+	cursor: move;
+}
+
+.container-content .container {
+	/*margin-bottom: 10;*/
+}
+
+.panel-title {
+	padding: 5px;
+	background-color: #99CCFF;
+	font-family: Verdana, Geneva, sans-serif;
+	font-size: 12;
+	user-select: none;
+	-khtml-user-select: none;
+	-webkit-user-select: none;
+	-ms-user-select: none;
+}
+
+.button-text {
+	padding: 5px;
+	font-family: Verdana, Geneva, sans-serif;
+	font-size: 12;
+	cursor: pointer;
+	user-select: none;
+	-khtml-user-select: none;
+	-webkit-user-select: none;
+	-ms-user-select: none;
+}
