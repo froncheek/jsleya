@@ -1,0 +1,75 @@
+<html>
+<head>
+	<title>jsleya documentation</title>
+	<link rel="stylesheet" type="text/css" href="style-jsleya-reset.css">
+	<link rel="stylesheet" type="text/css" href="style-jsleya.css">
+	<script type="text/javascript" src="js-1.8.js"></script>
+	<script type="text/javascript" src="jsleya.js"></script>
+	<script type="text/javascript" src="container/leya.Container.js"></script>
+	 <script type="text/javascript" src="container/leya.Panel.js"></script>
+	 <script type="text/javascript" src="container/leya.Button.js"></script>
+	 <script type="text/javascript" src="data/leya.data.DataTable.js"></script>
+	<!-- //// <script type="text/javascript" src="container/leya.panel.Control.js"></script>
+	// 
+	//  -->
+	<script type="text/javascript">
+
+		leya.ready(function() {	
+
+			var docList = [
+				'leya.abstract',
+				'leya.extend',
+				'leya.override'
+			];
+
+			leya.Panel('doc', {
+				title: 'jsleya documentation',
+				renderTo: leya.getBody(),
+				contents: [ 
+					leya.Panel('leyaObj', {
+						title: 'leya'
+					})
+				]
+			}).show();
+
+			var idx = 0;
+
+			function get() {
+				leya.httpReq({
+					url: "data/" + docList[idx] + ".json",
+					onJSON: function(data) {
+						leya.each(data.d, function(d) {
+							leyaObj.add(leya.Panel({
+								title: d.title,
+								html: 'Namespace: ' + d.ns + 
+								'<br><br>Param:<br><br>&nbsp;&nbsp;' + d.param + 
+								'<br><br>Return:<br><br>&nbsp;&nbsp;' + d.return +
+								'<br><br>' + d.html
+							}) );
+						});
+						
+						// idx++;
+						// if(idx < docList.length) {
+						// 	get();
+						// }
+					},
+					failed: function() {
+						// idx++;
+						// if(idx < docList.length) {
+						// 	get();
+						// }
+					}
+				});
+			}
+
+			get();
+			
+			
+		});
+
+	</script>
+</head>
+<body>
+
+</body>
+</html>

@@ -13,10 +13,10 @@ leya.override('leya.Panel', {
 
 		if(this.title) {
 			//var canvas = this.el.findByClass('container-canvas').eq(0),
-			var t = new leya.Element({
+			var t = leya.Element({
 					tag: 'div',
 					innerHTML: this.title,
-					className: 'panel-title'
+					className: 'pnl-ttle'
 				});
 
 			if(this.draggable) {
@@ -26,6 +26,12 @@ leya.override('leya.Panel', {
 				this.canvas.appendChild(t.dom);
 			} else {
 				this.canvas.prependChild(t.dom);
+			}
+			if(this.html) {
+				this.canvas.appendChild(leya.Element({
+					className: 'pnl-html',
+					innerHTML: this.html
+				}).dom);
 			}
 		}
 
@@ -42,6 +48,13 @@ leya.override('leya.Panel', {
 					canvas.prependChild(ctrl.el.dom);
 				});
 			}
+		}
+	},
+	setTitle: function(title) {
+		var t = this.el.findByClass('pnl-ttle').first();
+
+		if(t) {
+			t.innerHTML = title;
 		}
 	}
 });

@@ -1,0 +1,53 @@
+{
+	"d": [{
+		"title": "abstract",
+		"ns": "leya.abstract",
+		"param" : "Namespace (String) - ",
+		"return" : "Object",
+		"html": "Usage: <br><br>leya.abstract('Com.view', )"
+	}, {
+		"title": "extend",
+		"ns": "leya.extend",
+		"html": "Usage: "
+	},{
+		"title": "override",
+		"ns": "leya.override",
+		"html": "Usage: "
+	},{
+		"title": "abstract",
+		"ns": "leya.abstract",
+		"html": "Usage: "
+	},{
+		"title": "abstract",
+		"ns": "leya.abstract",
+		"html": "Usage: "
+	},{
+		"title": "abstract",
+		"ns": "leya.abstract",
+		"html": "Usage: "
+	},{
+		"title": "abstract",
+		"ns": "leya.abstract",
+		"html": "Usage: "
+	},{
+		"title": "abstract",
+		"ns": "leya.abstract",
+		"html": "Usage: "
+	},{
+		"title": "abstract",
+		"ns": "leya.abstract",
+		"html": "Usage: "
+	},{
+		"title": "abstract",
+		"ns": "leya.abstract",
+		"html": "Usage: "
+	},{
+		"title": "abstract",
+		"ns": "leya.abstract",
+		"html": "Usage: "
+	},{
+		"title": "abstract",
+		"ns": "leya.abstract",
+		"html": "Usage: "
+	}]
+}

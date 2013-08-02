@@ -8,38 +8,38 @@ leya.abstract('leya.Container', {
     createTpl: function() {
         var border = this.border || 0,
             wrapper = {
-                className: 'container' + (this.shadow === true ? ' leya-shadow' : ' ')
+                className: 'ctnr' + (this.shadow === true ? ' leya-shadow' : ' ')
             },
             canvas = {
-                className: 'container-canvas',
-                innerHTML: this.html || null,
+                className: 'ctnr-canvas',
+                //innerHTML: this.html || null,
                 style: {}
             },
             leftDrag = {
-                className: 'container-left-draggable',
+                className: 'ctnr-left-draggable',
                 style: {
                     width: border
                 }
             },
             rightDrag = {
-                className: 'container-right-draggable',
+                className: 'ctnr-right-draggable',
                 style: {
                     width: border
                 }
             },
             innerWrapper = {
-                className: 'container-inner',
+                className: 'ctnr-inner',
                 style: {}
             },
             bodyHeight = leya.getHeight(),
             bodyWidth = leya.getWidth(),
             thickness = ((this.resizable === true ? border : 0) * 2);
 
-        if(this.contents && this.contents.length > 0) {
+        //if(this.contents && this.contents.length > 0) {
             canvas.children = [{
-                className: 'container-contents'
+                className: 'ctnr-contents'
             }]
-        }
+        //}
 
         if(this.resizable === true) {
             innerWrapper.children = [
@@ -49,13 +49,13 @@ leya.abstract('leya.Container', {
             ];
 
             wrapper.children = [{
-                className: 'container-top-draggable',
+                className: 'ctnr-top-draggable',
                 style: {
                     height: border
                 }
             }, 
             innerWrapper, {
-                className: 'container-bottom-draggable',
+                className: 'ctnr-bottom-draggable',
                 style: {
                     height: border
                 }
@@ -65,6 +65,7 @@ leya.abstract('leya.Container', {
         }
 
         this.tpl = wrapper;
+        return this;
     },
     addEvents: function() {
         var self = this;
@@ -83,23 +84,42 @@ leya.abstract('leya.Container', {
     init: function() {
         //this.events = new leya.EventObserver('click', 'resize');
         //this.events.get();
-        this.addEvents('resize');
-        this.createTpl();
-        this.render();
+        //this.addEvents('resize');
+        this.createTpl().render();
+        return this;
     },
     onresize: function() {
         this.doLayout();
     },
+    add: function(con) {
+        var contents = this.el.findByClass('ctnr-contents').eq(0),
+            padding = this.padding;
+
+        this.ctr = this.ctr || 0;
+        con.parentCt = this;
+        con.el.addClass('content');
+        con.show(contents.appendChild(leya.Element({
+            tag: 'div',
+            className: 'ctnr-content',
+            style: {
+                padding: ['0 ', padding, ' ', padding, ' ', padding].join(''),
+                paddingTop: (this.ctr == 0 ? padding : 0) 
+            }
+        }).dom));
+        this.ctr++;
+        //this.doLayout();
+    },
     render: function() {    
-        this.el = new leya.Element(this.tpl);
-        this.canvas = this.el.findByClass('container-canvas').eq(0);
+        this.el = leya.Element(this.tpl);
+        this.canvas = this.el.findByClass('ctnr-canvas').eq(0);
         this.rendered = true;
+        return this;
     },
     doLayout: function() {
-        var innerWrapper = this.el.findByClass('container-inner').eq(0),
-            canvas = this.canvas, //this.el.findByClass('container-canvas').eq(0),
-            ld = this.el.findByClass('container-left-draggable').eq(0),
-            rd = this.el.findByClass('container-right-draggable').last();
+        var innerWrapper = this.el.findByClass('ctnr-inner').eq(0),
+            canvas = this.canvas, //this.el.findByClass('ctnr-canvas').eq(0),
+            ld = this.el.findByClass('ctnr-left-draggable').eq(0),
+            rd = this.el.findByClass('ctnr-right-draggable').last();
 
         if(!this.parentCt) {
             canvas.setWidth(leya.getWidth() - (this.border * 2));
@@ -111,6 +131,7 @@ leya.abstract('leya.Container', {
         if(this.parentCt) {
             this.parentCt.doLayout();
         }
+        return this;
     },
     show: function(dom) {
         if(!this.showed && (dom || (dom = this.renderTo))) {
@@ -128,36 +149,40 @@ leya.abstract('leya.Container', {
             }
         }
         this.doLayout();
+
+        return this;
     },
     hide: function() {
         this.el.addClass('leya-hidden');
         if(this.parentCt) {
             this.parentCt.doLayout();
         }
+        return this;
     },
     renderItems: function() {
     	var self = this,
             padding = this.padding, 
-            contents = this.el.findByClass('container-contents').eq(0),
+            contents = this.el.findByClass('ctnr-contents').eq(0),
     		content;
 
     	if(content = this.contents) {
-    		leya.each(content, function(content, idx) {
-                content.parentCt = self;
-                content.el.addClass('content');
-                content.show(contents.appendChild(new leya.Element({
-                    tag: 'div',
-                    className: 'container-content',
-                    style: {
-                        padding: ['0 ', padding, ' ', padding, ' ', padding].join(''),
-                        paddingTop: (idx == 0 ? padding : 0) 
-                    }
-                }).dom));
+    		leya.each(content, function(content) {
+                self.add(content);
+                // content.parentCt = self;
+                // content.el.addClass('content');
+                // content.show(contents.appendChild(leya.Element({
+                //     tag: 'div',
+                //     className: 'ctnr-content',
+                //     style: {
+                //         padding: ['0 ', padding, ' ', padding, ' ', padding].join(''),
+                //         paddingTop: (idx == 0 ? padding : 0) 
+                //     }
+                // }).dom));
     		});
     	}
     },
     getCanvas: function() {
-        return (this.canvas = this.el.findByClass('container-canvas').eq(0));
+        return (this.canvas = this.el.findByClass('ctnr-canvas').eq(0));
     },
     getEl: function() {
         return this.el;

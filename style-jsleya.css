@@ -1,9 +1,11 @@
-.container {
+.ctnr {
 	background-color: #BDBDBD;
 	/*padding: 8px;*/
+	font-family: Verdana, Geneva, sans-serif;
+	font-size: 12;
 }
-.container-contents,
-.container-content {
+.ctnr-contents,
+.ctnr-content {
 	/*background-color: #01A9DB; /*#F79F81; */
 	background-color: white;
 	/*border: 10px solid #A4A4A4;*/
@@ -12,27 +14,27 @@
 	display: block;
 	/*padding: 10 10 10 10;*/
 }
-.container-canvas {
+.ctnr-canvas {
 	display: inline-block;
 	vertical-align: top;
 }
-.container-top-draggable {
+.ctnr-top-draggable {
 	background-color: gray;
 	cursor: n-resize;
 }
-.container-left-draggable {
+.ctnr-left-draggable {
 	vertical-align: top;
 	background-color: gray;
 	display: inline-block;
 	cursor: w-resize;
 }
-.container-right-draggable {
+.ctnr-right-draggable {
 	vertical-align: top;
 	background-color: gray;
 	display: inline-block;
 	cursor: e-resize;
 }
-.container-bottom-draggable {
+.ctnr-bottom-draggable {
 	background-color: gray;
 	cursor: s-resize;
 }
@@ -51,11 +53,11 @@
 	cursor: move;
 }
 
-.container-content .container {
+.ctnr-content .ctnr {
 	/*margin-bottom: 10;*/
 }
 
-.panel-title {
+.pnl-ttle {
 	padding: 5px;
 	background-color: #99CCFF;
 	font-family: Verdana, Geneva, sans-serif;
@@ -64,6 +66,10 @@
 	-khtml-user-select: none;
 	-webkit-user-select: none;
 	-ms-user-select: none;
+}
+
+.pnl-html {
+	padding: 5px;
 }
 
 .button-text {

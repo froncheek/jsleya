@@ -6,89 +6,27 @@
 	<script type="text/javascript" src="js-1.8.js"></script>
 	<script type="text/javascript" src="jsleya.js"></script>
 	<script type="text/javascript" src="container/leya.Container.js"></script>
-	<script type="text/javascript" src="container/leya.Panel.js"></script>
-	<script type="text/javascript" src="container/leya.panel.Control.js"></script>
-	<script type="text/javascript" src="container/leya.Button.js"></script>
-	<script type="text/javascript" src="data/leya.data.DataTable.js"></script>
+	 <script type="text/javascript" src="container/leya.Panel.js"></script>
+	 <script type="text/javascript" src="container/leya.Button.js"></script>
+	 <script type="text/javascript" src="data/leya.data.DataTable.js"></script>
+	<!-- //// <script type="text/javascript" src="container/leya.panel.Control.js"></script>
+	// 
+	//  -->
 	<script type="text/javascript">
 
-		leya.ready(function() {
+		leya.ready(function() {	
 
-			dt = new leya.data.DataTable({
-				root: 'd',
-				url: 'data/data.json'
+			leya.Panel('Com.container', {
+				contents: [ leya.Panel({
+					contents: [ leya.Panel({
+						title: 'Content'
+					}) ]
+				}) ],
+				renderTo: leya.getBody()
 			});
+
+			Com.container.show();
 			
-			dt.load();
-
-			var box1 = new leya.Panel({
-				title: 'This is a Box!'
-			});
-
-			var childPanel = new leya.Panel({
-				title: 'Panel with bottom title',
-				titlePosition: 'bottom',
-				contents: [ new leya.Panel({
-					title: 'See below!'
-				}) ]
-			});
-
-			var panelWithButton = new leya.Panel({
-				title: 'Panel with buttons example',
-				contents: [ 
-					new leya.Button({
-						text: 'Button 1'
-					}), 
-					new leya.Button({
-						text: 'Button 2'
-					})
-				]
-			});
-			
-			var panel = new leya.Panel({
-				title: 'Panel',
-				renderTo: leya.getBody(),
-				contents: [ box1, panelWithButton, childPanel ]
-			});
-
-			panel.show();
-
-		    // var panel = new leya.Panel({
-		    // 	renderTo: leya.getBody(),
-		    // 	title: 'Panel'
-		    // });
-
-		    // panel.show();
-/*/
-		    var Container2 = new leya.Container({
-		        fontColor: 'gray',
-		        background: 'black',
-		        height: '100px',
-		        title: 'this is Container 2',
-		        html: 'this is the content 2'
-		    });
-
-		    var Container3 = new leya.Container({
-		        fontColor: 'gray',
-		        background: 'black',
-		        //height: '100px',
-		        title: 'this is title2',
-		        items: [Container2, Container1]
-		    });
-			//*/
-
-			// var sample = new test.Sample({
-			// 	title: 'Sample Title'
-			// });
-
-		/*var Container1 = new leya.Container({
-		        fontColor: 'gray',
-		        background: 'black',
-		        height: '100px',
-		        title: 'this is Container 1',
-		        html: 'this is the content 1'
-		    });
-*/
 		});
 
 	</script>

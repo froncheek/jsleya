@@ -45,6 +45,14 @@ ly.fn.extend = function(/*source, [,(abstract,sealed...]*/) {
 };
 
 ly.fn.extend(ly.fn, {
+    delay: function(ms, fn) {
+        setTimeout(fn, ms);
+        return this;
+    },
+    delayEvery: function(ms, fn) {
+        setInterval(fn, ms);
+        return this;
+    },
     parseXML: function() {
         if (typeof window.DOMParser != "undefined") {
 
@@ -212,7 +220,7 @@ ly.fn.extend(ly.fn, {
         return getWidthAndHeight().width;
     },
     getId: function() {
-        return 'leya-' + (id++);
+        return 'ly-' + (id++);
     },
     isArray: function(o) {
         return Array.isArray(o);
@@ -267,10 +275,12 @@ ly.fn.extend(ly.fn, {
         return o;
     },
     splitns: function(n) {
-        var ns1 = (n = n.trim()).substr(0, n.lastIndexOf('.')),
-            len = ns1.length;
+        if(n && n.trim) {
+            var ns1 = (n = n.trim()).substr(0, n.lastIndexOf('.')),
+                len = ns1.length;
 
-        return [ns1, n.substr(ns1 ? len + 1 : 0, n.length - len)];
+            return [ns1, n.substr(ns1 ? len + 1 : 0, n.length - len)];
+        }
     },
     setVersion: function(/* Version */) {
         var v = arguments[0],
@@ -390,23 +400,37 @@ ly.fn.extend(ly.fn, {
     },
     initClass: function() {
         var _createConstructor = function(ns, o, isOverride) {
-                var _fn = function() {
+                var _fn = function(ns, o) {
+                    if(leya.isString(ns)) {
+                        var sns = leya.splitns(ns),
+                            d = leya.ns(sns[0], o.attachTo);
+
+                        return( (d[sns[1]] = new _fn.init(o)) );
+                    } else {
+                        o = ns;
+                        return new _fn.init(o);
+                    }
+                };
+
+                //_fn.prototype = o;   
+                var fn = function() {
                     return this.init.apply(
                         leya.extend(this, leya.isObject(arguments[0]) ?  arguments[0] : {}), arguments
                     );
-                };
-
-                //_fn.prototype = o;    
+                }; 
 
                 if(isOverride) {
                     //leya.extendIf(_fn.prototype, o.base.prototype);
-                    _fn.prototype = new o.base();
+                    //_fn.prototype = o.base();
                     //_fn.prototype = o.base.prototype;
-                    leya.extend(_fn.prototype, o);
-                    _fn.base = o.base.prototype;
+                    fn.prototype = new o.base.init();
+                    leya.extend(fn.prototype, o);
+                    _fn.base = o.base.init.prototype;
                 } else {
-                    _fn.prototype = o;    
+                    fn.prototype = o;    
                 }
+
+                _fn.init = fn;
                 
                 // leya.extend(_fn.prototype, {
                 //     namespace: ns,
@@ -427,7 +451,6 @@ ly.fn.extend(ly.fn, {
                 //         return ns;
                 //     }
                 // });
-                
                 return _fn;
             },
             _create = function(ns, o, isOverride) {
