@@ -1,0 +1,57 @@
+<html>
+<head>
+	<title>{js:leya}</title>
+	<link rel="stylesheet" type="text/css" href="css/style-jsleya-reset.css">
+	<link rel="stylesheet" type="text/css" href="css/style-jsleya.css">
+	<script type="text/javascript" src="js-1.8.js"></script>
+	<script type="text/javascript" src="jsleya.js"></script>
+	<script type="text/javascript" src="lib/leya.lib.Event.js"></script>
+	<script type="text/javascript" src="container/leya.Container.js"></script>
+	<script type="text/javascript" src="container/leya.Panel.js"></script>
+	<script type="text/javascript" src="container/leya.Button.js"></script>
+	<script type="text/javascript" src="data/leya.data.DataTable.js"></script>
+	<!-- //// <script type="text/javascript" src="container/leya.panel.Control.js"></script>
+	// 
+	//  -->
+	<script type="text/javascript">
+
+		leya.ready(function() {	
+
+			leya.Container('Com.con', {
+				renderTo: leya.getBody(),
+				contents: [
+					leya.Container({
+						contents: [
+							leya.Panel({
+								title: 'wa'
+							})
+						]
+					}), leya.Container({
+						contents: [
+							leya.Panel({
+								title: 'wa'
+							})
+						]
+					}), leya.Container({
+						contents: [
+							leya.Panel({
+								title: 'wa'
+							})
+						]
+					}), leya.Container({
+						contents: [
+							leya.Panel({
+								title: 'wa'
+							})
+						]
+					})
+				]
+			}).show();
+			
+		});
+
+	</script>
+</head>
+<body>
+</body>
+</html>

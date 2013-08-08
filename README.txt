@@ -1,4 +1,4 @@
-							jsleya 
+			jsleya 
 
 
 What is jsleya?
@@ -9,10 +9,13 @@ developers to build website fast, light and less code. It contains
 several components that can be use with the likes of Container, Panel,
 Forms, Grid, Tabs and more.
 
-How to use?
------------
+Setting up on a server?
+---------------------------
 
-TODO
+Make sure to create
+http://localhost/jsleya -> jsleya/src
+http://localhost/jsleya/css -> jsleya/css
+http://localhost/jsleya/docs -> jsleya/docs
 
 API Documentation
 -----------------

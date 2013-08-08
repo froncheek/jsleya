@@ -20,8 +20,6 @@ var win = window,
     eventListeners = {},
     eventObservers = {};
 
-alert(ua);
-
 ly.fn = ly.prototype;
 ly.fn.version = '0.1';
 ly.fn.versionName = 'Alpha';
@@ -94,7 +92,7 @@ ly.fn.extendIf(String.prototype, {
 
 ly.fn.extend(ly.fn, {
     isIE: function() {
-        return ua.test(/msie/);
+        return /msie/.test(ua);
     }(),
     delay: function(ms, fn) {
         setTimeout(fn, ms);
