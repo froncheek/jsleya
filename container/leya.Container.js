@@ -1,67 +1,76 @@
-leya.abstract('leya.Container', {
+leya.override('leya.Container', {
 	//attachTo: ly.fn,
-    border: 1,
+    base: leya.lib.Event,
+    border: true,
+    borderStyle: {
+        'border': '1px solid gray'
+    },
+    margin: true,
+    marginStyle: {
+        'margin': 5
+    },
+    paddingStyle: {
+        'padding': 12
+    },
     renderTo: undefined,
-    padding: 12,
-    resizable: true,
+    resizable: false,
     shadow: true,
     createTpl: function() {
-        var border = this.border || 0,
-            wrapper = {
-                className: 'ctnr' + (this.shadow === true ? ' leya-shadow' : ' ')
+        var wrapper = {
+                className: 'ct' + (this.shadow === true ? ' lyshdw' : '')
             },
             canvas = {
-                className: 'ctnr-canvas',
-                //innerHTML: this.html || null,
-                style: {}
-            },
-            leftDrag = {
-                className: 'ctnr-left-draggable',
+                className: 'ct-cnvs',
                 style: {
-                    width: border
-                }
+                    'min-width' : 1040
+                },
+                children: [{
+                    className: 'ct-ctns'
+                }]
             },
-            rightDrag = {
-                className: 'ctnr-right-draggable',
-                style: {
-                    width: border
-                }
-            },
-            innerWrapper = {
-                className: 'ctnr-inner',
-                style: {}
-            },
-            bodyHeight = leya.getHeight(),
-            bodyWidth = leya.getWidth(),
-            thickness = ((this.resizable === true ? border : 0) * 2);
+            stylefn = function(pos, loc, len) {
+                var o = {};
 
-        //if(this.contents && this.contents.length > 0) {
-            canvas.children = [{
-                className: 'ctnr-contents'
-            }]
-        //}
+                o['padding' + pos] = len;
+                o.cursor = loc + '-resize';
+
+                return o;
+            };
 
         if(this.resizable === true) {
-            innerWrapper.children = [
-                leftDrag, 
-                canvas,
-                rightDrag
-            ];
-
             wrapper.children = [{
-                className: 'ctnr-top-draggable',
-                style: {
-                    height: border
-                }
-            }, 
-            innerWrapper, {
-                className: 'ctnr-bottom-draggable',
-                style: {
-                    height: border
-                }
+                style: stylefn('Left', 'nw', 8),
+                children: [{
+                    style: stylefn('Right', 'ne', 8),
+                    children: [{
+                        style: stylefn('Top', 'n', 8)
+                    }]
+                }]
+            }, {
+                style: stylefn('Left', 'w', 8),
+                children: [{
+                    style: stylefn('Right', 'e', 8),
+                    children: [ canvas ]
+                }]
+            }, {
+                style: stylefn('Left', 'sw', 8),
+                children: [{
+                    style: stylefn('Right', 'se', 8),
+                    children: [{
+                        style: stylefn('Bottom', 's', 8)
+                    }]
+                }]
             }];
         } else {
             wrapper.children = [ canvas ];
+
+            if(this.border === true) {
+                wrapper.style = this.borderStyle;
+            }
+        }
+
+        if(this.margin === true) {
+            leya.extend(wrapper.style, this.marginStyle);
         }
 
         this.tpl = wrapper;
@@ -82,8 +91,7 @@ leya.abstract('leya.Container', {
         });
     },
     init: function() {
-        //this.events = new leya.EventObserver('click', 'resize');
-        //this.events.get();
+        leya.Container.base.init.apply(this, arguments);
         //this.addEvents('resize');
         this.createTpl().render();
         return this;
@@ -92,42 +100,33 @@ leya.abstract('leya.Container', {
         this.doLayout();
     },
     add: function(con) {
-        var contents = this.el.findByClass('ctnr-contents').eq(0),
+        var contents = this.el.dom.findByClass('ct-ctns').eq(0),
             padding = this.padding;
 
+        contents.addStyle(this.paddingStyle);
         this.ctr = this.ctr || 0;
         con.parentCt = this;
-        con.el.addClass('content');
+        con.el.dom.addClass('ctn');
         con.show(contents.appendChild(leya.Element({
             tag: 'div',
-            className: 'ctnr-content',
+            className: 'ct-ctn',
             style: {
-                padding: ['0 ', padding, ' ', padding, ' ', padding].join(''),
-                paddingTop: (this.ctr == 0 ? padding : 0) 
+                padding: padding
             }
         }).dom));
         this.ctr++;
-        //this.doLayout();
+        return this;
     },
     render: function() {    
+        var dom;
+
         this.el = leya.Element(this.tpl);
-        this.canvas = this.el.findByClass('ctnr-canvas').eq(0);
+        dom = this.el.dom;
+        this.canvas = dom.findByClass('ct-cnvs').eq(0);
         this.rendered = true;
         return this;
     },
     doLayout: function() {
-        var innerWrapper = this.el.findByClass('ctnr-inner').eq(0),
-            canvas = this.canvas, //this.el.findByClass('ctnr-canvas').eq(0),
-            ld = this.el.findByClass('ctnr-left-draggable').eq(0),
-            rd = this.el.findByClass('ctnr-right-draggable').last();
-
-        if(!this.parentCt) {
-            canvas.setWidth(leya.getWidth() - (this.border * 2));
-            innerWrapper.setWidth(canvas.getWidth() + (this.border * 2));
-        }
-        ld.setHeight(canvas.getHeight());
-        rd.setHeight(canvas.getHeight());
-
         if(this.parentCt) {
             this.parentCt.doLayout();
         }
@@ -143,7 +142,7 @@ leya.abstract('leya.Container', {
             this.renderItems();
             this.showed = true;
         } else {
-            this.el.removeClass('leya-hidden');
+            this.el.removeClass('lyhdn');
             if(this.parentCt) {
                 this.parentCt.doLayout();
             }
@@ -153,7 +152,7 @@ leya.abstract('leya.Container', {
         return this;
     },
     hide: function() {
-        this.el.addClass('leya-hidden');
+        this.el.addClass('lyhdn');
         if(this.parentCt) {
             this.parentCt.doLayout();
         }
@@ -162,27 +161,17 @@ leya.abstract('leya.Container', {
     renderItems: function() {
     	var self = this,
             padding = this.padding, 
-            contents = this.el.findByClass('ctnr-contents').eq(0),
+            contents = this.el.dom.findByClass('ct-ctns').eq(0),
     		content;
-
+        
     	if(content = this.contents) {
     		leya.each(content, function(content) {
                 self.add(content);
-                // content.parentCt = self;
-                // content.el.addClass('content');
-                // content.show(contents.appendChild(leya.Element({
-                //     tag: 'div',
-                //     className: 'ctnr-content',
-                //     style: {
-                //         padding: ['0 ', padding, ' ', padding, ' ', padding].join(''),
-                //         paddingTop: (idx == 0 ? padding : 0) 
-                //     }
-                // }).dom));
     		});
     	}
     },
     getCanvas: function() {
-        return (this.canvas = this.el.findByClass('ctnr-canvas').eq(0));
+        return (this.canvas = this.el.dom.findByClass('ct-cnvs').eq(0));
     },
     getEl: function() {
         return this.el;

@@ -20,31 +20,82 @@ var win = window,
     eventListeners = {},
     eventObservers = {};
 
-ly.fn = ly.prototype;
+alert(ua);
 
-ly.fn.version = '1.0';
+ly.fn = ly.prototype;
+ly.fn.version = '0.1';
 ly.fn.versionName = 'Alpha';
 
-ly.fn.extend = function(/*source, [,(abstract,sealed...]*/) {
-    var args = arguments,
-        d = args[0] || {},
-        s;
-
+function extend(p1, p2, f) {
+    p1 = p1 || {};
     if(Object.prototype.isExtensible && !Object.isExtensible(d)) {
         return false;
     }
-
-    for(var i=1, len = args.length; i < len;) {
-        s = args[i++];
-        for(var p in s) {
-            d[p] = s[p];
+    if(f === true) {
+        for(var p in p2) {
+            p1[p] = p2[p];
+        }
+    } else {
+        for(var p in p2) {
+            if(!p1[p]) {
+                p1[p] = p2[p];  
+            } 
         }
     }
-    
-    return d;
+    return p1; 
+}
+
+ly.fn.extend = function(p1, p2) {
+    return extend.call(this, p1, p2, true);
+};
+ly.fn.extendIf = function(p1, p2) {
+    return extend.call(this, p1, p2);
 };
 
+ly.fn.extend(Function.prototype, {
+    exec: function(fn) {
+        var self = this;
+        return function() {
+            if(fn() !== false) {
+                self();
+            }
+        }
+    },
+    scope: function(sc) {
+        var self = this;
+        return function() {
+            return self.apply(sc, arguments);
+        };
+    },
+    seq: function() {
+        var self = this,
+            args = arguments;
+        return function() { 
+            var ret = self.apply(this, arguments);
+            for(i = 0; i < args.length;) {
+                ret = args[i++].call(this, arguments, ret);
+            }
+            return ret;
+        }
+    }
+});
+
+ly.fn.extendIf(String.prototype, {
+    toggle: function(s1, s2) {
+        if(this === s1) {
+            return s2;
+        }
+        return this;
+    },
+    trim: function () {
+        return this.replace(/^\s+|\s+$/g,'');
+    }
+});
+
 ly.fn.extend(ly.fn, {
+    isIE: function() {
+        return ua.test(/msie/);
+    }(),
     delay: function(ms, fn) {
         setTimeout(fn, ms);
         return this;
@@ -196,23 +247,6 @@ ly.fn.extend(ly.fn, {
             }
         }
     },
-    extendIf: function() {
-        var args = arguments,
-        d = args[0] || {},
-        s = args[1];
-
-        if(Object.prototype.isExtensible && !Object.isExtensible(d)) {
-            return false;
-        }
-
-        for(var p in s) {
-            if(!d[p]) {
-                d[p] = s[p];  
-            } 
-        }
-        
-        return d;   
-    },
     getHeight: function() {
         return getWidthAndHeight().height;
     },
@@ -242,9 +276,6 @@ ly.fn.extend(ly.fn, {
     },
     isClass: function() {
         var ns; return (arguments.length >= 2 && this.isString(ns = arguments[0]) && ns && this.isNs(ns));
-    },
-    isDefProp: function() {
-
     },
     /*getBrowserEvent: function() {
         if(arguments.length) {
@@ -431,26 +462,7 @@ ly.fn.extend(ly.fn, {
                 }
 
                 _fn.init = fn;
-                
-                // leya.extend(_fn.prototype, {
-                //     namespace: ns,
-                //     getBase: function() {
-                //         return o.base;
-                //     },
-                //     getBasePrototype: function() {
-                //         return o.base.prototype;
-                //     },
-                //     getDomDirectory: function() {
-                //         //TODO:implement traverse here
-                //         return this;    
-                //     },
-                //     getName: function() {
-                //         return leya.splitns(ns)[1];
-                //     },
-                //     getNamespace: function() {
-                //         return ns;
-                //     }
-                // });
+
                 return _fn;
             },
             _create = function(ns, o, isOverride) {
@@ -577,24 +589,12 @@ var els = {
 };
 
 leya.extend(Node.prototype, {
-    prependChild: function(el, bel) {
-        return this.insertBefore(el, bel || this.firstChild);
-    },
-    setHeight: function(h) {
-        this.style.height = h;
-
-        return this;
-    },
-    setWidth: function(w) {
-        this.style.width = w;
-
-        return this;
-    },
-    getHeight: function() {
-        return this.clientHeight;
-    },
-    getWidth: function() {
-        return this.clientWidth;
+    addClass: function(className) {
+        if(this.classList) {
+            this.classList.add(className);
+        } else {
+            this.className += ' ' + className;
+        }
     },
     addStyle: function(key, val) {
         var el = this;
@@ -606,80 +606,61 @@ leya.extend(Node.prototype, {
         } else {
             this[key] = val;
         }
+        return this;
     },
     createEl: function(o) {
-        return this.appendChild(new leya.Element(o).dom);
-    }
-});
-
-leya.abstract('leya.Element', {
-    init: function(prop) {
-        this.createLayout(prop);
-    },
-    addClass: function(className) {
-        var dom = this.dom || this;
-
-        if(dom.classList) {
-            dom.classList.add(className);
-        } else {
-            dom.className += ' ' + className;
-        }
-    },
-    appendTo: function(el) {
-        el.appendChild(this.dom);
-    },
-    prependTo: function(el) {
-        el.prependChild(this.dom);
-    },
-    createEl: function() {
-
-    },
-    createLayout: function(prop) {
-        this.dom = createHtml.call(prop);
-    },
-    removeClass: function(className) {
-        var dom = this.dom || this;
-
-        if(dom.classList) {
-            dom.classList.remove(className);
-        } else {
-            //dom.className += className;
-        }
+        return this.appendChild(createHtml.call(o));
     },
     find: function() {},
-    findBy: function(fn, scope) {
-        return fn.call(scope || this);
-    },
+    findBy: function() {},
     findByClass: function(className) {
-        return leya.extend(this.dom.getElementsByClassName(className), els);
+        return leya.extend(this.getElementsByClassName(className), els);
     },
     findByTag: function() {},
-    get: function() {
-        return this.dom;
-    },
     getHeight: function() {
-        return this.dom.clientHeight;
+        return this.clientHeight;
     },
     getWidth: function() {
-        return this.dom.clientWidth;  
+        return this.clientWidth;
     },
-    addEvent: function(t, l, u, a) {
+    on: function() {
         if(document.addEventListener) {
             return function(t, l, u, a) {
-                var dom = this.dom;
-
-                dom.addEventListener(t, l, u, a);
+                this.addEventListener(t, l, u, a);
                 return this;
             };
         } else {
             return function(t, l) {
-                var dom = this.dom;
-
-                dom.attachEvent('on' + t, l);
+                this.attachEvent('on' + t, l);
                 return this;
             };
         }
-    }()
+    }(),
+    prependChild: function(el, bel) {
+        return this.insertBefore(el, bel || this.firstChild);
+    },
+    removeStyle: function(attr) {
+        this[attr] = '';
+
+        return this;
+    },
+    setHeight: function(h) {
+        this.style.height = h;
+
+        return this;
+    },
+    setWidth: function(w) {
+        this.style.width = w;
+
+        return this;
+    },
+    un: function() {}
+});
+
+leya.abstract('leya.Element', {
+    init: function(prop) {
+        this.dom = createHtml.call(prop);
+    }
 });
 
 leya.addEvent(window, 'resize', function() {

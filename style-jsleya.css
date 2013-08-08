@@ -1,11 +1,13 @@
-.ctnr {
+.ct {
 	background-color: #BDBDBD;
 	/*padding: 8px;*/
 	font-family: Verdana, Geneva, sans-serif;
 	font-size: 12;
+	border-color: gray;
+	border-style: solid;
 }
-.ctnr-contents,
-.ctnr-content {
+.ct-ctns,
+.ct-ctn {
 	/*background-color: #01A9DB; /*#F79F81; */
 	background-color: white;
 	/*border: 10px solid #A4A4A4;*/
@@ -14,46 +16,47 @@
 	display: block;
 	/*padding: 10 10 10 10;*/
 }
-.ctnr-canvas {
-	display: inline-block;
+.ct-cnvs {
+	/*display: inline-block;*/
 	vertical-align: top;
+	cursor: auto;
 }
-.ctnr-top-draggable {
+.ct-tp-rsz {
 	background-color: gray;
 	cursor: n-resize;
 }
-.ctnr-left-draggable {
+.ct-lf-rsz {
 	vertical-align: top;
 	background-color: gray;
 	display: inline-block;
 	cursor: w-resize;
 }
-.ctnr-right-draggable {
+.ct-rt-rsz {
 	vertical-align: top;
 	background-color: gray;
 	display: inline-block;
 	cursor: e-resize;
 }
-.ctnr-bottom-draggable {
+.ct-bt-rsz {
 	background-color: gray;
 	cursor: s-resize;
 }
-.content {
-	display: inline-block;
+.ctn {
+	/*display: inline-block;*/
 }
 
-.leya-hidden {
+.lyhdn {
 	display: none;
 }
 
-.leya-shadow {
+.lyshdw {
 	box-shadow: 0px 5px 10px #888888;
 }
 .leya-draggable {
 	cursor: move;
 }
 
-.ctnr-content .ctnr {
+.ct-ctn .ct {
 	/*margin-bottom: 10;*/
 }
 
@@ -70,6 +73,11 @@
 
 .pnl-html {
 	padding: 5px;
+}
+
+.pnl-lay-hor {
+	vertical-align: top;
+	display: inline-block;
 }
 
 .button-text {

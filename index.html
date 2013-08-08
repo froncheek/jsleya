@@ -16,16 +16,36 @@
 
 		leya.ready(function() {	
 
-			leya.Panel('Com.container', {
-				contents: [ leya.Panel({
-					contents: [ leya.Panel({
-						title: 'Content'
-					}) ]
-				}) ],
-				renderTo: leya.getBody()
-			});
-
-			Com.container.show();
+			leya.Container('Com.con', {
+				renderTo: leya.getBody(),
+				contents: [
+					leya.Container({
+						contents: [
+							leya.Panel({
+								title: 'wa'
+							})
+						]
+					}), leya.Container({
+						contents: [
+							leya.Panel({
+								title: 'wa'
+							})
+						]
+					}), leya.Container({
+						contents: [
+							leya.Panel({
+								title: 'wa'
+							})
+						]
+					}), leya.Container({
+						contents: [
+							leya.Panel({
+								title: 'wa'
+							})
+						]
+					})
+				]
+			}).show();
 			
 		});
 

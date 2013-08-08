@@ -5,6 +5,7 @@
 	<link rel="stylesheet" type="text/css" href="style-jsleya.css">
 	<script type="text/javascript" src="js-1.8.js"></script>
 	<script type="text/javascript" src="jsleya.js"></script>
+	<script type="text/javascript" src="lib/leya.lib.Event.js"></script>
 	<script type="text/javascript" src="container/leya.Container.js"></script>
 	 <script type="text/javascript" src="container/leya.Panel.js"></script>
 	 <script type="text/javascript" src="container/leya.Button.js"></script>
@@ -13,6 +14,14 @@
 	// 
 	//  -->
 	<script type="text/javascript">
+
+		var fn = function() {
+			alert('Start!');
+		}.exec(function() {
+			return false;
+		});
+
+		fn();
 
 		leya.ready(function() {	
 
@@ -23,11 +32,15 @@
 			];
 
 			leya.Panel('doc', {
-				title: 'jsleya documentation',
+				layout: 'horz',
 				renderTo: leya.getBody(),
 				contents: [ 
 					leya.Panel('leyaObj', {
+						//layout: 'horizontal',
 						title: 'leya'
+					}), leya.Panel('leyaObj2', {
+						layout: 'horz',
+						title: 'Oh Yeah!'
 					})
 				]
 			}).show();
@@ -39,16 +52,30 @@
 					url: "data/" + docList[idx] + ".json",
 					onJSON: function(data) {
 						leya.each(data.d, function(d) {
+
+							if(idx < 4) {
 							leyaObj.add(leya.Panel({
 								title: d.title,
 								html: 'Namespace: ' + d.ns + 
 								'<br><br>Param:<br><br>&nbsp;&nbsp;' + d.param + 
 								'<br><br>Return:<br><br>&nbsp;&nbsp;' + d.return +
 								'<br><br>' + d.html
-							}) );
+							}));
+						}
+							idx++;
+
+							if(idx < 5) {
+								leyaObj2.add(leya.Panel({
+									title: d.title,
+									html: 'Namespace: ' + d.ns + 
+									'<br><br>Param:<br><br>&nbsp;&nbsp;' + d.param + 
+									'<br><br>Return:<br><br>&nbsp;&nbsp;' + d.return +
+									'<br><br>' + d.html
+								}));
+							}
 						});
 						
-						// idx++;
+						
 						// if(idx < docList.length) {
 						// 	get();
 						// }
