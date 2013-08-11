@@ -5,7 +5,8 @@
 	<link rel="stylesheet" type="text/css" href="css/style-jsleya.css">
 	<script type="text/javascript" src="js-1.8.js"></script>
 	<script type="text/javascript" src="jsleya.js"></script>
-	<script type="text/javascript" src="lib/leya.lib.Event.js"></script>
+	<script type="text/javascript" src="class/leya.EventListener.js"></script>
+	<script type="text/javascript" src="lib/leya.lib.EventManager.js"></script>
 	<script type="text/javascript" src="container/leya.Container.js"></script>
 	<script type="text/javascript" src="container/leya.Panel.js"></script>
 	<script type="text/javascript" src="container/leya.Button.js"></script>
@@ -16,36 +17,84 @@
 	<script type="text/javascript">
 
 		leya.ready(function() {	
-
 			leya.Container('Com.con', {
 				renderTo: leya.getBody(),
 				contents: [
-					leya.Container({
+					leya.Panel({
+						title: 'Title',
+						resizable: true,
+						contents: [
+							leya.Panel({
+								resizable: true,
+								title: 'wa'
+							})
+						],
+						events: {
+							beforeresize: function() {
+								console.log('before resize');
+							},
+							afterresize: function() {
+								console.log('after resize');
+							}
+						}
+					}), leya.Panel({
+						title: 'Title',
+						resizable: true,
 						contents: [
 							leya.Panel({
 								title: 'wa'
 							})
-						]
-					}), leya.Container({
+						],
+						events: {
+							beforeresize: function() {
+								console.log('before resize');
+							},
+							afterresize: function() {
+								console.log('after resize');
+							}
+						}
+					}), leya.Panel({
+						title: 'Title',
+						resizable: true,
 						contents: [
 							leya.Panel({
 								title: 'wa'
 							})
-						]
-					}), leya.Container({
+						],
+						events: {
+							beforeresize: function() {
+								console.log('before resize');
+							},
+							afterresize: function() {
+								console.log('after resize');
+							}
+						}
+					}), leya.Panel({
+						title: 'Title',
+						resizable: true,
 						contents: [
 							leya.Panel({
 								title: 'wa'
 							})
-						]
-					}), leya.Container({
-						contents: [
-							leya.Panel({
-								title: 'wa'
-							})
-						]
+						],
+						events: {
+							beforeresize: function() {
+								console.log('before resize');
+							},
+							afterresize: function() {
+								console.log('after resize');
+							}
+						}
 					})
-				]
+				],
+				events: {
+					beforeresize: function() {
+						console.log('before resize');
+					},
+					afterresize: function() {
+						console.log('after resize');
+					}
+				}
 			}).show();
 			
 		});

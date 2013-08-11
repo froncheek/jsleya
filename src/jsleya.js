@@ -18,7 +18,8 @@ var win = window,
     id = 1000,
     ly = function() {},
     eventListeners = {},
-    eventObservers = {};
+    eventObservers = {},
+    cme = 'blur|change|click|contextmenu|copy|cut|dblclick|error|focus|focusin|focusout|hashchange|keydown|keypress|keyup|load|mousedown|mouseenter|mousemove|mouseout|mouseover|mouseup|mousewheel|paste|reset|resize|scroll|select|submit|textinput|unload|wheel';
 
 ly.fn = ly.prototype;
 ly.fn.version = '0.1';
@@ -428,8 +429,8 @@ ly.fn.extend(ly.fn, {
         return cInt;
     },
     initClass: function() {
-        var _createConstructor = function(ns, o, isOverride) {
-                var _fn = function(ns, o) {
+        var _createConstructor = function(ns, o, isOverride, isStatic) {
+                var _fn = !isStatic ? function(ns, o) {
                     if(leya.isString(ns)) {
                         var sns = leya.splitns(ns),
                             d = leya.ns(sns[0], o.attachTo);
@@ -439,35 +440,41 @@ ly.fn.extend(ly.fn, {
                         o = ns;
                         return new _fn.init(o);
                     }
+                } : function() {
+                    _fn.init.apply(_fn, arguments);
                 };
 
-                //_fn.prototype = o;   
                 var fn = function() {
                     return this.init.apply(
                         leya.extend(this, leya.isObject(arguments[0]) ?  arguments[0] : {}), arguments
                     );
                 }; 
 
-                if(isOverride) {
-                    //leya.extendIf(_fn.prototype, o.base.prototype);
-                    //_fn.prototype = o.base();
-                    //_fn.prototype = o.base.prototype;
+                if(isOverride === true) {
                     fn.prototype = new o.base.init();
                     leya.extend(fn.prototype, o);
                     _fn.base = o.base.init.prototype;
-                } else {
-                    fn.prototype = o;    
+                } else if(!isStatic) {
+                    fn.prototype = o; 
                 }
 
-                _fn.init = fn;
-
+                if(isStatic === true) {
+                    leya.extend(_fn, o);
+                } else {
+                    _fn.init = fn;    
+                }
+                
                 return _fn;
             },
-            _create = function(ns, o, isOverride) {
+            _create = function(ns, o, isOverride, isStatic) {
                 if(this.isClass.apply(this, arguments)) {
                     var sns = this.splitns(ns);
 
-                    fn = _createConstructor.call(this, ns, o, isOverride);
+                    if(!isStatic) {
+                        fn = _createConstructor.call(this, ns, o, isOverride);
+                    } else {
+                        fn = _createConstructor.call(this, ns, o, isOverride, isStatic); 
+                    }
                     o = this.ns(sns[0], o.attachTo);
                     o[sns[1]] = fn;
                 }
@@ -481,8 +488,8 @@ ly.fn.extend(ly.fn, {
             override: function(ns, o) {
                 _create.call(this, ns, o, true);
             },
-            lib: function(ns, o) {
-
+            static: function(ns, o) {
+                _create.call(this, ns, o, false, true);
             }
         });
 
@@ -618,8 +625,26 @@ leya.extend(Node.prototype, {
     getHeight: function() {
         return this.clientHeight;
     },
+    getFullHeight: function() {
+        return this.clientHeight + this.getHeightExcess();
+    },
+    getHeightExcess: function() {
+        return (leya.getDigits(this.style.marginTop) || 0) +
+            (leya.getDigits(this.style.marginBottom) || 0) +
+            (leya.getDigits(this.style.paddingTop) || 0) +
+            (leya.getDigits(this.style.paddingBottom) || 0);
+    },
     getWidth: function() {
         return this.clientWidth;
+    },
+    getFullWidth: function() {
+        return this.clientWidth + this.getWidthExcess();
+    },
+    getWidthExcess: function() {
+        return (leya.getDigits(this.style.marginLeft) || 0) +
+            (leya.getDigits(this.style.marginRight) || 0) +
+            (leya.getDigits(this.style.paddingLeft) || 0) +
+            (leya.getDigits(this.style.paddingRight) || 0);
     },
     on: function() {
         if(document.addEventListener) {
@@ -643,12 +668,12 @@ leya.extend(Node.prototype, {
         return this;
     },
     setHeight: function(h) {
-        this.style.height = h;
+        this.style.height = h - this.getHeightExcess();
 
         return this;
     },
     setWidth: function(w) {
-        this.style.width = w;
+        this.style.width = w + (this.getWidthExcess() / 2);
 
         return this;
     },

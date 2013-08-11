@@ -1,9 +1,8 @@
 leya.override('leya.Container', {
-	//attachTo: ly.fn,
-    base: leya.lib.Event,
+    base: leya.EventListener,
     border: true,
     borderStyle: {
-        'border': '1px solid gray'
+        'border': '1px solid black'
     },
     margin: true,
     marginStyle: {
@@ -16,14 +15,12 @@ leya.override('leya.Container', {
     resizable: false,
     shadow: true,
     createTpl: function() {
-        var wrapper = {
+        var self = this,
+            wrapper = {
                 className: 'ct' + (this.shadow === true ? ' lyshdw' : '')
             },
             canvas = {
                 className: 'ct-cnvs',
-                style: {
-                    'min-width' : 1040
-                },
                 children: [{
                     className: 'ct-ctns'
                 }]
@@ -33,31 +30,58 @@ leya.override('leya.Container', {
 
                 o['padding' + pos] = len;
                 o.cursor = loc + '-resize';
+                if(self.border == true) {
+                    var st;
+                    if((st = self.borderStyle['border-' + pos.toLowerCase()])) {
+                        o['border' + pos] = st;
+                    } else if(loc != 'n' && loc != 's'){
+                        if(loc == 'nw') {
+                            o['borderTop'] = self.borderStyle['border'];
+                            o['borderLeft'] = self.borderStyle['border'];
+                        } else if(loc == 'sw') {
+                            o['borderBottom'] = self.borderStyle['border'];
+                            o['borderLeft'] = self.borderStyle['border'];
+                        } else {
+                            o['border' + pos] = self.borderStyle['border'];
+                        }
+                    }
+                }
 
                 return o;
             };
 
         if(this.resizable === true) {
+            wrapper.style = {
+                display: 'inline-block'
+            };
             wrapper.children = [{
-                style: stylefn('Left', 'nw', 8),
+                className: 'nwrsz',
+                style: stylefn('Left', 'nw', 4),
                 children: [{
-                    style: stylefn('Right', 'ne', 8),
+                    className: 'nersz',
+                    style: stylefn('Right', 'ne', 4),
                     children: [{
-                        style: stylefn('Top', 'n', 8)
+                        className: 'nrsz',
+                        style: stylefn('Top', 'n', 4)
                     }]
                 }]
             }, {
-                style: stylefn('Left', 'w', 8),
-                children: [{
-                    style: stylefn('Right', 'e', 8),
+                className: 'wrsz',
+                style: stylefn('Left', 'w', 4),
+                children: [{ 
+                    className: 'ersz',
+                    style: stylefn('Right', 'e', 4),
                     children: [ canvas ]
                 }]
             }, {
-                style: stylefn('Left', 'sw', 8),
+                className: 'swrsz',
+                style: stylefn('Left', 'sw', 4),
                 children: [{
-                    style: stylefn('Right', 'se', 8),
+                    className: 'sersz',
+                    style: stylefn('Right', 'se', 4),
                     children: [{
-                        style: stylefn('Bottom', 's', 8)
+                        className: 'srsz',
+                        style: stylefn('Bottom', 's', 4)
                     }]
                 }]
             }];
@@ -76,23 +100,10 @@ leya.override('leya.Container', {
         this.tpl = wrapper;
         return this;
     },
-    addEvents: function() {
-        var self = this;
-
-        leya.each(arguments, function(v) {
-            var op = {};
-
-            op[v] = {
-                fn: self['on' + v],
-                scope: self
-            }
-            leya.addObserver(op);
-            delete self['on' + v];
-        });
-    },
     init: function() {
         leya.Container.base.init.apply(this, arguments);
-        //this.addEvents('resize');
+
+        this.addEvent('beforeresize', 'resize', 'afterresize');
         this.createTpl().render();
         return this;
     },
@@ -118,13 +129,110 @@ leya.override('leya.Container', {
         return this;
     },
     render: function() {    
-        var dom;
+        var self = this,
+            dom;
 
         this.el = leya.Element(this.tpl);
         dom = this.el.dom;
         this.canvas = dom.findByClass('ct-cnvs').eq(0);
+        this.canvasCtns = dom.findByClass('ct-ctns').eq(0);
         this.rendered = true;
+        this.regEvent(this.el.dom);
+
+        leya.each(this.events, function(v, k) {
+            self.attachEvent(k, v, self);
+        });
         return this;
+    },
+    regEvent: function(dom) {
+        var self = this,
+            evmgr = leya.lib.EventManager;
+
+        if(this.resizable === true) {
+            var nw = dom.findByClass('nwrsz').first(),
+                ne = nw.findByClass('nersz').first(),
+                n = ne.findByClass('nrsz').first(),
+                w = dom.findByClass('wrsz').first(),
+                e = w.findByClass('ersz').first(),
+                sw = dom.findByClass('swrsz').first(),
+                se = sw.findByClass('sersz').first(),
+                s = se.findByClass('srsz').first(),
+                rsz = [ nw, ne, n, w, e, sw, se, s ],
+                upfn = function(m) {
+                    if(this.drag === true) {
+                        this.drag = false;
+                        this.dragging = false;
+                        self.fireEvent('afterresize');
+                    }
+                },
+                mvfn = function(m) {
+                    if(this.drag == true) {
+                        if(this.dragging == 'se' || (this.clientX >= dom.getFullWidth() - 8 && 
+                            this.clientY >= self.canvasCtns.getFullHeight() - 8)) {
+                            dom.setWidth(m.clientX - dom.offsetLeft);
+                        self.canvasCtns.setHeight(m.clientY - self.canvasCtns.offsetTop);
+                            this.dragging = 'se';
+                        } else if(this.dragging == 'right' || this.clientX >= dom.getFullWidth() - 8) {
+                            dom.setWidth(m.clientX - dom.offsetLeft);
+                            this.dragging = 'right';
+                        } else if(this.dragging == 'bottom' || this.clientY >= self.canvasCtns.getFullHeight() - 8) {
+                            self.canvasCtns.setHeight(m.clientY - self.canvasCtns.offsetTop);
+                            this.dragging = 'bottom';
+                        }
+                        self.fireEvent('resize');
+                        return true;
+                    }
+                    return false;
+                },
+                dwfn = function(m) {
+                    this.drag = true;
+                    this.clientX = m.clientX;
+                    this.clientY = m.clientY;
+                    self.fireEvent('beforeresize');
+                    m.stopPropagation();
+                };
+
+            leya.each(rsz, function(r) {
+                evmgr({
+                    mousedown: {
+                        scope: r,
+                        reg: [{
+                            evt: 'mousemove',
+                            fn: mvfn
+                        }],
+                        fn: dwfn
+                    },
+                    mousemove: {
+                        scope: r,
+                        reg: [{
+                            evt: 'mouseup',
+                            fn: upfn
+                        }],
+                        fn: mvfn
+                    },
+                    mouseup: {
+                        scope: r,
+                        unreg: [{
+                            evt: 'mousemove',
+                            fn: mvfn
+                        }, {
+                            evt: 'mouseup',
+                            fn: upfn
+                        }],
+                        fn: upfn
+                    }
+                });
+            });
+            evmgr({
+                mousedown: {
+                    scope: this.canvas,
+                    fn: function(m) { m.stopPropagation();}
+                }
+            });
+        }
+        if(this.draggable === true) {
+
+        }
     },
     doLayout: function() {
         if(this.parentCt) {
