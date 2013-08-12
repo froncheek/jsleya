@@ -2,7 +2,7 @@ leya.override('leya.Container', {
     base: leya.EventListener,
     border: true,
     borderStyle: {
-        'border': '1px solid black'
+        'border': '1px solid gray'
     },
     margin: true,
     marginStyle: {
@@ -168,12 +168,19 @@ leya.override('leya.Container', {
                 mvfn = function(m) {
                     if(this.drag == true) {
                         if(this.dragging == 'se' || (this.clientX >= dom.getFullWidth() - 8 && 
-                            this.clientY >= self.canvasCtns.getFullHeight() - 8)) {
+                            this.clientY >= dom.getFullHeight() - 8)) {
                             dom.setWidth(m.clientX - dom.offsetLeft);
-                        self.canvasCtns.setHeight(m.clientY - self.canvasCtns.offsetTop);
+                            self.canvasCtns.setHeight(m.clientY - self.canvasCtns.offsetTop);
                             this.dragging = 'se';
                         } else if(this.dragging == 'right' || this.clientX >= dom.getFullWidth() - 8) {
-                            dom.setWidth(m.clientX - dom.offsetLeft);
+                            var parent = dom.parentNode,
+                                width = m.clientX - dom.offsetLeft;
+
+                            if(parent.getWidth() > width) {
+                                dom.setWidth(width - 12);
+                            } else {
+                                dom.setWidth(parent.getWidth() - 12);
+                            }
                             this.dragging = 'right';
                         } else if(this.dragging == 'bottom' || this.clientY >= self.canvasCtns.getFullHeight() - 8) {
                             self.canvasCtns.setHeight(m.clientY - self.canvasCtns.offsetTop);
