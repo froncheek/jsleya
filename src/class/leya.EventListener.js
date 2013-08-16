@@ -30,5 +30,6 @@ leya.abstract('leya.EventListener', {
 	},
 	removeEvent: function() {
 
-	}
+	},
+	signal: function() {}
 });

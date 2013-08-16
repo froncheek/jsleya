@@ -7,100 +7,93 @@
 	<script type="text/javascript" src="jsleya.js"></script>
 	<script type="text/javascript" src="class/leya.EventListener.js"></script>
 	<script type="text/javascript" src="lib/leya.lib.EventManager.js"></script>
-	<script type="text/javascript" src="container/leya.Container.js"></script>
+	<script type="text/javascript" src="container/leya.Container2.js"></script>
 	<script type="text/javascript" src="container/leya.Panel.js"></script>
+	<!--<script type="text/javascript" src="container/leya.Container.js"></script>
+	
 	<script type="text/javascript" src="container/leya.Button.js"></script>
 	<script type="text/javascript" src="data/leya.data.DataTable.js"></script>
-	<!-- //// <script type="text/javascript" src="container/leya.panel.Control.js"></script>
+	 //// <script type="text/javascript" src="container/leya.panel.Control.js"></script>
 	// 
 	//  -->
 	<script type="text/javascript">
 
 		leya.ready(function() {	
-			leya.Container('Com.con', {
+			leya.Container({
 				renderTo: leya.getBody(),
 				contents: [
 					leya.Panel({
-						title: 'Title',
-						resizable: true,
+						title: 'Sample Panel',
+						width: 100,
+						expandWidth: true,
 						contents: [
 							leya.Panel({
-								resizable: true,
-								title: 'wa'
+								title: 'Panel Content'
 							})
-						],
-						events: {
-							beforeresize: function() {
-								console.log('before resize');
-							},
-							afterresize: function() {
-								console.log('after resize');
-							}
-						}
-					}), leya.Panel({
-						title: 'Title',
-						resizable: true,
-						contents: [
-							leya.Panel({
-								title: 'wa'
-							})
-						],
-						events: {
-							beforeresize: function() {
-								console.log('before resize');
-							},
-							afterresize: function() {
-								console.log('after resize');
-							}
-						}
-					}), leya.Panel({
-						title: 'Title',
-						resizable: true,
-						contents: [
-							leya.Panel({
-								title: 'wa'
-							})
-						],
-						events: {
-							beforeresize: function() {
-								console.log('before resize');
-							},
-							afterresize: function() {
-								console.log('after resize');
-							}
-						}
-					}), leya.Panel({
-						title: 'Title',
-						resizable: true,
-						contents: [
-							leya.Panel({
-								title: 'wa'
-							})
-						],
-						events: {
-							beforeresize: function() {
-								console.log('before resize');
-							},
-							afterresize: function() {
-								console.log('after resize');
-							}
-						}
-					})
-				],
-				events: {
-					beforeresize: function() {
-						console.log('before resize');
-					},
-					afterresize: function() {
-						console.log('after resize');
-					}
-				}
+						]
+					}),
+					leya.Container(),
+					leya.Container()
+				]
 			}).show();
+			// leya.Container('Com.con', {
+			// 	renderTo: leya.getBody(),
+
+			// 	contents: [
+			// 		leya.Panel({
+			// 			title: 'Title',
+			// 			resizable: true,
+			// 			height: 250,
+			// 			width: 500,
+			// 			contents: [
+			// 				leya.Panel({
+			// 					resizable: true,
+			// 					title: 'wa'
+			// 				})
+			// 			],
+			// 			events: {
+			// 				beforeresize: function() {
+			// 					console.log('before resize');
+			// 				},
+			// 				afterresize: function() {
+			// 					console.log('after resize');
+			// 				}
+			// 			}
+			// 		}), leya.Panel({
+			// 			title: 'Title',
+			// 			resizable: true,
+			// 			contents: [
+			// 				leya.Panel({
+			// 					title: 'wa',
+			// 					height: 100,
+			// 					width: 500
+			// 				})
+			// 			],
+			// 			events: {
+			// 				beforeresize: function() {
+			// 					console.log('before resize');
+			// 				},
+			// 				afterresize: function() {
+			// 					console.log('after resize');
+			// 				}
+			// 			}
+			// 		})
+			// 	],
+			// 	events: {
+			// 		beforeresize: function() {
+			// 			console.log('before resize');
+			// 		},
+			// 		afterresize: function() {
+			// 			console.log('after resize');
+			// 		}
+			// 	}
+			// }).show();
 			
 		});
 
 	</script>
 </head>
 <body>
+<time datetime="9/9/2001">
 </body>
 </html>

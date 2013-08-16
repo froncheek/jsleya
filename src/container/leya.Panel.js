@@ -15,7 +15,7 @@ leya.override('leya.Panel', {
 		leya.Panel.base.init.apply(this, arguments);
 	},
     add: function(con) {
-    	var contents = this.el.dom.findByClass('ct-ctns').eq(0),
+    	var contents = this.el.dom.findByClass('ctctns').eq(0),
             padding = this.padding;
 
         contents.addStyle(this.paddingStyle);
@@ -29,35 +29,16 @@ leya.override('leya.Panel', {
                 padding: padding
             }
         }).dom));
+
+        if(con.el.dom.getFullWidth() > leya.parseInt(this.contentWidth)) {
+            this.contentWidth = con.el.dom.getFullWidth();
+        }
         this.ctr++;
+
         return this;
-
-      //   var contents = this.el.dom.findByClass('ct-ctns').eq(0),
-      //       padding = this.padding;
-
-      //   if(this.layout == 'horizontal') {
-    		// contents.addStyle('overflow', 'scroll');
-      //   }
-      //   this.ctr = this.ctr || 0;
-      //   con.parentCt = this;
-      //   con.el.dom.addClass('ctn');
-      //   con.show(contents.appendChild(leya.Element({
-      //       tag: 'div',
-      //       className: 'ct-ctn' + (this.layout == 'horizontal' ? ' pnl-lay-hor' : ''),
-      //       style: {
-      //           padding: padding
-      //           //paddingTop: (this.ctr == 0 ? padding : 0) 
-      //       }
-      //   }).dom));
-      //   this.ctr++;
-
-      //   return this;
     },
     doLayout: function() {
     	leya.Panel.base.doLayout.call(this);
-
-    	// var innerWrapper = this.el.findByClass('ctnr-inner').eq(0),
-     //        canvas = this.canvas;
 
     	if(this.layout == 'horizontal') {
             //canvas.setWidth(leya.getWidth() - (this.border * 2) - (this.padding * 2) - 50);
@@ -68,29 +49,20 @@ leya.override('leya.Panel', {
 	render: function() {
 		leya.Panel.base.render.call(this);
 		this.rendered = false;
-		this.renderCtrls();
+		//this.renderCtrls();
 
 		if(this.title) {
-			//var canvas = this.el.findByClass('container-canvas').eq(0),
-			var t = leya.Element({
-					tag: 'div',
-					innerHTML: this.title,
-					className: 'pnl-ttle'
-				});
+			var t = document.createElement('div'); 
 
-			if(this.draggable) {
-				t.addClass('leya-draggable');			
-			}
+			leya.extend(t, {
+				innerHTML: this.title,
+				className: 'pnttle' + (this.draggable ? ' leya-draggable' : '')
+			});
+
 			if(this.titlePosition === 'bottom') {
-				this.canvas.appendChild(t.dom);
+				this.el.dom.appendChild(t);
 			} else {
-				this.canvas.prependChild(t.dom);
-			}
-			if(this.html) {
-				this.canvas.appendChild(leya.Element({
-					className: 'pnl-html',
-					innerHTML: this.html
-				}).dom);
+				this.el.dom.prependChild(t);
 			}
 		}
 
@@ -110,10 +82,10 @@ leya.override('leya.Panel', {
 		}
 	},
 	setTitle: function(title) {
-		var t = this.el.dom.findByClass('pnl-ttle').first();
+		var t = this.el.dom.findByClass('pnttle').first();
 
 		if(t) {
-			t.innerHTML = title;
+			this.title = t.innerHTML = title;
 		}
 	}
 });

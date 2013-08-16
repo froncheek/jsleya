@@ -423,7 +423,7 @@ ly.fn.extend(ly.fn, {
         var cInt = replaceValue || 0;
 
         try {
-            cInt = parseInt(o);
+            cInt = parseInt(o || 0);
         } catch(ex) {}
 
         return cInt;
@@ -510,7 +510,7 @@ function createHtml(parent) {
             if(this.style) delete this.style;
 
             if(children.length) {
-                if(style.height) delete style.height;
+                //if(style.height) delete style.height;
             } else {
                 if(parent && style) {
                     var verticalThickness = ly.fn.element.getThickness(parent).vertical,
@@ -660,7 +660,11 @@ leya.extend(Node.prototype, {
         }
     }(),
     prependChild: function(el, bel) {
-        return this.insertBefore(el, bel || this.firstChild);
+        if(bel || (bel = this.firstChild)) {
+            return this.insertBefore(el, bel);
+        } else {
+            return this.appendChild(el);
+        }
     },
     removeStyle: function(attr) {
         this[attr] = '';
@@ -673,7 +677,7 @@ leya.extend(Node.prototype, {
         return this;
     },
     setWidth: function(w) {
-        this.style.width = w + (this.getWidthExcess() / 2);
+        this.style.width = w !== undefined ? w + (this.getWidthExcess() / 2) : '';
 
         return this;
     },

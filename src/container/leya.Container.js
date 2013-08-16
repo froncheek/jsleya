@@ -14,16 +14,25 @@ leya.override('leya.Container', {
     renderTo: undefined,
     resizable: false,
     shadow: true,
+    expandWidth: true,
+    expandHeight: true,
     createTpl: function() {
         var self = this,
             wrapper = {
-                className: 'ct' + (this.shadow === true ? ' lyshdw' : '')
+                className: 'ct' + (this.shadow === true ? ' lyshdw' : ''),
+                style: {
+                    width: this.width ? this.width : '',
+                    display: (this.width ? 'inline-block' : '')
+                }
             },
             canvas = {
                 className: 'ct-cnvs',
                 children: [{
                     className: 'ct-ctns'
-                }]
+                }],
+                style: {
+                    height: this.height ? this.height : ''
+                }
             },
             stylefn = function(pos, loc, len) {
                 var o = {};
@@ -51,9 +60,10 @@ leya.override('leya.Container', {
             };
 
         if(this.resizable === true) {
-            wrapper.style = {
+            leya.extend(wrapper.style, {
                 display: 'inline-block'
-            };
+            });
+
             wrapper.children = [{
                 className: 'nwrsz',
                 style: stylefn('Left', 'nw', 4),
@@ -146,6 +156,7 @@ leya.override('leya.Container', {
     },
     regEvent: function(dom) {
         var self = this,
+            parentCt = self.parentCt,
             evmgr = leya.lib.EventManager;
 
         if(this.resizable === true) {
@@ -179,7 +190,13 @@ leya.override('leya.Container', {
                             if(parent.getWidth() > width) {
                                 dom.setWidth(width - 12);
                             } else {
-                                dom.setWidth(parent.getWidth() - 12);
+                                var parentCt = self.parentCt;
+                                if(parentCt.expandWidth == true) {
+                                    parentCt.setWidth();
+                                    dom.setWidth(width - 12);
+                                } else {
+                                    dom.setWidth(parent.getWidth() - 12);    
+                                }
                             }
                             this.dragging = 'right';
                         } else if(this.dragging == 'bottom' || this.clientY >= self.canvasCtns.getFullHeight() - 8) {
@@ -295,5 +312,18 @@ leya.override('leya.Container', {
         if(this.el) {
             return this.el.dom;
         }
+    },
+    getWidth: function() {
+        return this.el.dom.getFullWidth();
+    },
+    getHeight: function() {
+        return this.el.dom.getFullHeight();
+    },
+    setWidth: function(w) {
+        this.el.dom.setWidth(w);
+        return this;
+    },
+    setHeight: function() {
+        return this;
     }
 });
